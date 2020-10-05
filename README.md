@@ -28,7 +28,7 @@
             Pipeline
                 Definition : Pipeline script from SCM
                 SCM : Git
-                Repository URL : https://github.com/kin3303/DDI_OKD_DEMO.git
-                Branches to build : */master
+                Repository URL : https://github.com/kin3303/DDI_OPENSHIFT.git
+                Branches to build : */dockerPlugin
                 Script Path : misc/Jenkinsfile
 ```
