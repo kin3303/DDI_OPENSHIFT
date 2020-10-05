@@ -1,0 +1,90 @@
+version: '3'
+
+services:
+  jenkins:
+    image: kin3303/jenkins-docker:latest 
+    restart: always
+    volumes:
+      - jenkins-volume:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+      - 5000:5000
+      - 50000:50000
+    environment:
+      - TZ=Asia/Seoul
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest  
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.example.com'
+    ports:
+      - 80:80
+      - 22:22
+      - 443:443
+    volumes:
+      - gitlab-config-volume:/etc/gitlab
+      - gitlab-log-volume:/var/log/gitlab
+      - gitlab-data-volume:/var/opt/gitlab
+
+  sonarqube:
+    image: sonarqube:7.9.2-community
+    restart: always
+    networks:
+      - sonarnet
+    environment:
+      - SONARQUBE_JDBC_USERNAME=admin
+      - SONARQUBE_JDBC_PASSWORD=!QA2ws#ED4rf
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgressdb:5432/sonarqube
+    ports:
+      - 8090:9000
+      - 9092:9092 
+    volumes:
+      - sonarqube-conf-volume:/opt/sonarqube/conf
+      - sonarqube-data-volume:/opt/sonarqube/data
+      - sonarqube-extensions-volume:/opt/sonarqube/extensions
+      - sonarqube-bundled-plugins-volume:/opt/sonarqube/lib/bundled-plugins
+
+  postgressdb:
+    image: postgres:12.1 
+    restart: always
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=!QA2ws#ED4rf
+      - POSTGRES_DB=sonarqube
+    volumes:
+      - sonarqube-db-volume:/var/lib/postgresql
+      - postgresql-data-volume:/var/lib/postgresql/data
+
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  jenkins-volume: 
+  nexus-volume:
+  git-volume:
+  index-volume:
+  cache-volume:
+  gitlab-config-volume:
+  gitlab-log-volume:
+  gitlab-data-volume: 
+  sonarqube-conf-volume:
+  sonarqube-data-volume:
+  sonarqube-extensions-volume:
+  sonarqube-bundled-plugins-volume:
+  sonarqube-db-volume:
+  postgresql-data-volume:
+
+networks:
+  sonarnet:
+    driver: bridge
