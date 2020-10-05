@@ -10,8 +10,9 @@
   $ sysctl -w fs.file-max=65536
   $ ulimit -n 65536
   $ ulimit -u 4096
-  $ git clone https://github.com/kin3303/DDI_CBCD_TEST_ENV.git
-  $ cd DDI_CBCD_TEST_ENV
+  $ git clone https://github.com/kin3303/DDI_OPENSHIFT.git
+  $ cd DDI_OPENSHIFT
+  $ git checkout testEnv
   $ chmod +x install.sh
   $ ./install.sh
 ```
