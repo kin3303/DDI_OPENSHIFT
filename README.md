@@ -71,5 +71,6 @@ Manage Jenkins => Configure System 으로 이동해 아래 설정을 진행
     - Build with Parameters
       - PROJECT_NAME : jenkins-setup-test
       - CLUSTER_NAME :  
-    https://github.com/openshift/jenkins-client-plugin
+
+https://github.com/openshift/jenkins-client-plugin
 
