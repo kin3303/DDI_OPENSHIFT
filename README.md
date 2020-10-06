@@ -65,14 +65,10 @@ Manage Jenkins => Configure System 으로 이동해 아래 설정을 진행
       - Add Parameter -> String Parameter -> Name : PROJECT_NAME, Trim the String 체크
       - Add Parameter -> String Parameter -> Name : CLUSTER_NAME, Default Value : openshift-cluster, Trim the String 체크 
 3. Advanced Project Options
-    - Pipeline -> Script -> https://github.com/kin3303/DDI_OPENSHIFT/blob/openshiftPlugin/Jenkinsfile-Basic 컨텐츠 삽입
+    - Pipeline -> Script -> https://github.com/kin3303/DDI_OPENSHIFT/blob/openshiftPlugin/Jenkinsfile 컨텐츠 삽입
 
 4. Dashboard 로 이동 후 Openshift-Setup-Test 선택
     - Build with Parameters
       - PROJECT_NAME : jenkins-setup-test
       - CLUSTER_NAME : openshift-cluster
-
-## Step 4 : Openshift Cluster CI/CD 테스트
-
-https://github.com/openshift/jenkins-client-plugin
 
