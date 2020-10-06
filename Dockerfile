@@ -14,16 +14,16 @@ rm -rf /tmp/download/docker/dockerd && \
 mv /tmp/download/docker/docker* /usr/local/bin/ && \
 rm -rf /tmp/download
 
-RUN echo "deb http://security.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list
-RUN apt-get update -y && apt-get install -y --no-install-recommends \
-    libssl1.0.0 libssl-dev
+#RUN echo "deb http://security.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list
+#RUN apt-get update -y && apt-get install -y --no-install-recommends \
+#    libssl1.0.0 libssl-dev
 
-RUN ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.10
-RUN ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.10
+#RUN ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.10
+#RUN ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.10
 
 RUN groupadd -g 999 docker
 RUN usermod -aG staff,docker jenkins
 
 #RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-#USER jenkins
+USER jenkins
