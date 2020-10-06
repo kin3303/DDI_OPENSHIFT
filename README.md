@@ -48,8 +48,8 @@
 ## Step 5. 결과 확인
 
 ```
+  Portainer - http://your-ip-address:9000
   Jenkins — http://your-ip-address:8080
   SonarQube — http://your-ip-address:9000
-  GitLab — http://your-ip-address:10080
-  Portainer - http://your-ip-address:9000
+  Nexus — http://your-ip-address:8081
 ```
