@@ -53,7 +53,8 @@ Manage Jenkins => Configure System 으로 이동해 아래 설정을 진행
       - Credentials : Add 하여 추가 후 해당 Credential 선택
         - Kind : Openshift Token for Openshift Client Plugin
         - Token : 로그인 토큰 ( co whoami -t )
-        - ID : my-user-token
+        - ID : okd-cred
+        - Description : okd-cred
     - Apply 버튼 클릭 
     
 ## Step 4 : Openshift Cluster 연결 테스트 
