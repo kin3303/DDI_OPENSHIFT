@@ -17,6 +17,7 @@
    - New Environment
        - Name : my-dev
        - Cluster Type : Openshift
+       - Cluster Name : my-dev
        - Configuration : my-dev-sa
        - Openshift Project : my-dev
    - New Environment
@@ -24,10 +25,14 @@
        - Cluster Type : Openshift
        - Configuration : my-prod-sa
        - Openshift Project : my-prod 
-4. Cloudbees CD Catalog 를 사용해  Tempalte 파일 임포트
+6. Cloudbees CD Catalog 를 사용해  Tempalte 파일 임포트
    - Catalog -> Import Openshift Template
-       - OpenShift Template Content (YAML File) : 
-
-5. Service-Env 맵핑 Configuration 을 열어 변수로 처리할 부분을 변경
-   - Map -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
-
+       - OpenShift Template Content (YAML File) : deploy-template.yaml 파일의 내용을 복사 붙여넣기
+       - Project Name : DDI
+       - Environment Project Name : DDI
+       - Environment Name : my-dev
+       - Cluster Name : my-dev
+7. 생성된 Microservice (nodejs-web-demo) 를 열어 아래 작업을 수행
+   - Map + -> Select Existing -> my-prod
+   - Map -> my-dev -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
+   - Map -> my-prod -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
