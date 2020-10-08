@@ -19,7 +19,7 @@ EOF
 $ chmod +x cloudbeesCD-Config-Generator.sh
 
 $ oc login https://test.letsgohomenow.com:8443 --token=jKRtoHa4RtdJzYKTgYqhv4e2Vems4pouN4Xqt8_SXXg
-$ oc new-project my-dev
-$ oc new-project my-prod
 $ ./cloudbeesCD-Config-Generator.sh my-dev my-dev-sa
 $ ./cloudbeesCD-Config-Generator.sh my-prod my-prod-sa 
+
+# 나온 결과를 Cloudbees CD 의 Openshift Configuration 으로 만들면 됨
