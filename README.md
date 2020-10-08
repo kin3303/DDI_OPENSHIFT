@@ -17,12 +17,21 @@
         - ID : docker-hub
         - Description : docker-hub
         
-3. 프로젝트 추가
+3. github 에 로그인하기 위한 Credential 을 Jenkins 에 추가
+    - Credentials -> Add Credentials (구버전)
+    - Manage Jenkins -> Manage Credentials -> Provider : Jenkins -> Global credentials  -> Add Credentials (최신버전)
+        - Kind : Username with password
+        - Scope : Global
+        - Username : github 계정명
+        - Password : github 패스워드
+        - ID : git-hub
+        - Description : git-hub
+4. 프로젝트 추가
     - New Item
         - ItemName : nodejs-pipe
         - ItemType : Pipeline
 
-4. 프로젝트 Configure
+5. 프로젝트 Configure
     - Configure -> Advanced Project Options -> Pipeline
         - Definition : Pipeline script from SCM
         - SCM : Git
