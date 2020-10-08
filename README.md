@@ -1,6 +1,6 @@
 ## DDI_OKD_DEMO
 
-- Openshift 에서 nodejs app 배포를 위한 Demo Project
+- Openshift 에서 Cloudbees CD 와 연계하여 nodejs app 배포를 위한 Demo Project
 
 
 ## Step 1. Jenkins 초기화
