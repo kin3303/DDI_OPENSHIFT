@@ -14,7 +14,7 @@
    
 ## Step 2 : Cloudbees CD 준비사항
 
-4. Cloudbees CD 에 두 개의 Configuration 을 생성
+1. Cloudbees CD 에 두 개의 Configuration 을 생성
    - Configuration 파일에 정리된 명령을 실행
    - Plugins -> EC-Openshift -> Configure
        - Openshift API Endpoint : https://test.letsgohomenow.com:8443
@@ -26,7 +26,7 @@
        - Service Account
            - Name : my-prod-sa
            - Bearer token : 토큰값 입력
-5. Cloudbees CD 에 두 개의 Env 을 생성
+2. Cloudbees CD 에 두 개의 Env 을 생성
    - New Environment
        - Name : my-dev
        - Cluster Type : Openshift
@@ -38,7 +38,7 @@
        - Cluster Type : Openshift
        - Configuration : my-prod-sa
        - Openshift Project : my-prod 
-6. Cloudbees CD Catalog 를 사용해  Tempalte 파일 임포트
+3. Cloudbees CD Catalog 를 사용해  Tempalte 파일 임포트
    - Catalog -> Import Openshift Template
        - OpenShift Template Content (YAML File) : deploy-template.yaml 파일의 내용을 복사 붙여넣기
        - Project Name : DDI
@@ -48,7 +48,7 @@
        
 ## Step 2 : Cloudbees CD 파이프라인 설계
 
-7. 생성된 Microservice (nodejs-web-demo) 를 열어 아래 작업을 수행
+1. 생성된 Microservice (nodejs-web-demo) 파라미터 
    - Map + -> Select Existing -> my-prod
    - Map -> my-dev -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
    - Map -> my-prod -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
