@@ -33,3 +33,9 @@
         - Branches to build : */dockerPlugin
         - Script Path : misc/Jenkinsfile
          
+2. Cloubees CD 와 Jenkins 연결
+    - Cloubees CD -> Configurations -> CI Configurations -> Create New CI Configuration
+        - Name : jenkinsCfg
+        - Server URL : http://<Jenkins 서버 URL>:8080/
+        - User Name : <Jenkins User Name>
+        - API Token or Password : <Jenkins Password>
