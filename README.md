@@ -37,5 +37,5 @@
     - Cloubees CD -> Configurations -> CI Configurations -> Create New CI Configuration
         - Name : jenkinsCfg
         - Server URL : http://<Jenkins 서버 URL>:8080/
-        - User Name : <Jenkins User Name>
-        - API Token or Password : <Jenkins Password>
+        - User Name : [Jenkins User Name]
+        - API Token or Password : [Jenkins Password]
