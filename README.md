@@ -22,9 +22,14 @@
         - ItemType : Pipeline
 
 4. 프로젝트 Configure
+    - Configure -> General
+       - This project is parameterized
+         - Add Parameter -> Boolean Parameter -> Name : DO_TEST
+         - Add Parameter -> String Parameter -> Name : DO_PUBLISH  
     - Configure -> Advanced Project Options -> Pipeline
         - Definition : Pipeline script from SCM
         - SCM : Git
         - Repository URL : https://github.com/kin3303/DDI_OPENSHIFT.git
         - Branches to build : */dockerPlugin
         - Script Path : misc/Jenkinsfile
+         
