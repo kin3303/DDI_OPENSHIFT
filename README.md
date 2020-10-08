@@ -38,7 +38,7 @@
        - Cluster Type : Openshift
        - Configuration : my-prod-sa
        - Openshift Project : my-prod 
-3. Cloudbees CD Catalog 를 사용해  Tempalte 파일 임포트
+3. Cloudbees CD Catalog 를 사용해 Template 내용을 Microservice 자동 모델링
    - Catalog -> Import Openshift Template
        - OpenShift Template Content (YAML File) : deploy-template.yaml 파일의 내용을 복사 붙여넣기
        - Project Name : DDI
@@ -46,9 +46,9 @@
        - Environment Name : my-dev
        - Cluster Name : my-dev
        
-## Step 2 : Cloudbees CD 파이프라인 설계
+## Step 3 : Cloudbees CD 파이프라인 설계
 
-1. 생성된 Microservice (nodejs-web-demo) 파라미터 
+1. 생성된 Microservice (nodejs-web-demo) 파라미터 추가 작업
    - Map + -> Select Existing -> my-prod
    - Map -> my-dev -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
    - Map -> my-prod -> Microservice Configuration -> Container Configuration -> Version : $[/myPipelineRuntime/tagName]
