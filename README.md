@@ -9,7 +9,7 @@
 1. 기존 프로젝트의 Deployment, Service, Route 정보를 Template 파일로 제작
    - deploy-template.yaml 파일 참조
 2. my-dev, my-prod 프로젝트를 생성
-3.  my-dev, my-prod 프로젝트에 ImageStream 을 Import
+3. my-dev, my-prod 프로젝트에 ImageStream 을 Import
    - imageStream.yaml 파일 참조
 3. Cloudbees CD 에 두 개의 Configuration 을 생성
    - Configuration 파일 참조
