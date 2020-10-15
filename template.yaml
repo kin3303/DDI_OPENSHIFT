@@ -1,0 +1,144 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: cloudbees-cd-pipline
+  xpaas: 1.3.2
+metadata:
+  annotations:
+    description: Template for ${APPLICATION_NAME}
+  name: ${APPLICATION_NAME}
+objects:
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:   
+    labels:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+    namespace: ${PROJECT_NAME}
+  spec:
+    replicas: 1
+    selector:
+      deploymentconfig: ${APPLICATION_NAME}
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: ${APPLICATION_NAME}
+          deploymentconfig: ${APPLICATION_NAME}
+      spec:
+        containers:
+          - image: '172.30.1.1:5000/${PROJECT_NAME}/nodejs-image:${TAG_NAME}'
+            imagePullPolicy: Always
+            name: ${APPLICATION_NAME}
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+      - imageChangeParams:
+          containerNames:
+            - ${APPLICATION_NAME}
+          from:
+            kind: ImageStreamTag
+            name: '172.30.1.1:5000/my-dev/nodejs-image:${TAG_NAME}'
+            namespace: my-project-dev
+        type: ImageChange
+      - type: ConfigChange
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      description: Service for ${APPLICATION_NAME}
+    labels:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+    namespace: ${PROJECT_NAME}
+  spec:
+    clusterIP: 172.30.96.213
+    ports:
+      - name: 8080-tcp
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+    selector:
+      deploymentconfig: ${APPLICATION_NAME}
+    sessionAffinity: None
+    type: ClusterIP 
+- apiVersion: v1
+  kind: Route
+  metadata:
+    annotations:
+      description: Route for ${APPLICATION_NAME}
+    labels:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+    namespace: ${PROJECT_NAME}
+  spec:
+    host: ${APPLICATION_NAME}-${PROJECT_NAME}.${HOST_NAME}.xip.io
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: ${APPLICATION_NAME}
+      weight: 100
+    wildcardPolicy: None
+parameters:
+- description: The host name for the application.
+  name: HOST_NAME
+  required: true
+  value: 35.225.254.224
+- description: The project name for the application.
+  name: PROJECT_NAME
+  required: true
+  value: my-dev
+- description: The app name for the application.
+  name: APPLICATION_NAME
+  required: true
+  value: nodejs-web-demo
+- description: The tag name for the application.
+  name: TAG_NAME
+  required: true
+  value: latest
+
+
+---
+
+apiVersion: v1
+kind: Template
+labels:
+  template: cloudbees-cd-pipline
+  xpaas: 1.3.2
+metadata:
+  annotations:
+    description: Template for ${APPLICATION_NAME}
+  name: ${APPLICATION_NAME}
+objects:
+- apiVersion: v1 
+  kind: ImageStream
+  metadata:
+    name: nodejs-image
+    namespace: ${PROJECT_NAME}
+  spec:
+    dockerImageRepository: kin3303/nodejs-demo
+parameters:
+- description: The project name for the application.
+  name: PROJECT_NAME
+  required: true
+  value: my-dev
