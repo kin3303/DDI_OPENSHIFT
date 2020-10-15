@@ -31,13 +31,11 @@ $ oc new-project my-prod --description="my-prod" --display-name="my-prod"
 $ oc new-project my-dev --description="my-dev" --display-name="my-dev"
 
 $ cat > cloudbeesCD-Config-Generator.sh <<EOF
-
 #!/bin/bash
 
 export projectName=$1
 export serviceAccount=$2
 oc create -n $projectName serviceaccount $serviceAccount
-oc adm policy add-role-to-user admin system:serviceaccount:cbcd:erobot
 oc adm policy add-cluster-role-to-user edit system:serviceaccount:$projectName:$serviceAccount
 oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:$projectName:$serviceAccount
 secretName=`oc describe  -n $projectName serviceaccount $serviceAccount | grep Tokens:|awk '{print $2}'`
