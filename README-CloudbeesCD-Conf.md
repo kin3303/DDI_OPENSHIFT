@@ -27,8 +27,8 @@ $ oc login -u daeung
 
 # oc delete project my-prod  
 # oc delete project my-dev
-$ oc new-project cbcd --description="my-prod" --display-name="my-prod"
-$ oc new-project cbcd --description="my-dev" --display-name="my-dev"
+$ oc new-project my-prod --description="my-prod" --display-name="my-prod"
+$ oc new-project my-dev --description="my-dev" --display-name="my-dev"
 
 $ cat >cloudbeesCD-Config-Generator.sh <<EOF
 #!/bin/bash
