@@ -116,29 +116,3 @@ parameters:
   name: TAG_NAME
   required: true
   value: latest
-
-
----
-
-apiVersion: v1
-kind: Template
-labels:
-  template: cloudbees-cd-pipline
-  xpaas: 1.3.2
-metadata:
-  annotations:
-    description: Template for ${APPLICATION_NAME}
-  name: ${APPLICATION_NAME}
-objects:
-- apiVersion: v1 
-  kind: ImageStream
-  metadata:
-    name: nodejs-image
-    namespace: ${PROJECT_NAME}
-  spec:
-    dockerImageRepository: kin3303/nodejs-demo
-parameters:
-- description: The project name for the application.
-  name: PROJECT_NAME
-  required: true
-  value: my-dev
