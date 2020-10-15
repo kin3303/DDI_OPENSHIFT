@@ -25,7 +25,8 @@ cluster role "cluster-admin" added: "daeung"
 $ oc login -u daeung
 ..
 
-$ oc delete project cbcd # Test 용 > 프로젝트 다시 생성
+# oc delete project my-prod  
+# oc delete project my-dev
 $ oc new-project cbcd --description="my-prod" --display-name="my-prod"
 $ oc new-project cbcd --description="my-dev" --display-name="my-dev"
 
