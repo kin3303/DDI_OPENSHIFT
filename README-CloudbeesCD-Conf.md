@@ -30,7 +30,7 @@ $ oc login -u daeung
 $ oc new-project my-prod --description="my-prod" --display-name="my-prod"
 $ oc new-project my-dev --description="my-dev" --display-name="my-dev"
 
-$ cat > cloudbeesCD-Config-Generator.sh << EOF
+$cat <<EOF >>cloudbeesCD-Config-Generator.sh
 #!/bin/bash
 
 export projectName=$1
