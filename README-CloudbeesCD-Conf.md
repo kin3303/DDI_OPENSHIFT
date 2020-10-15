@@ -26,7 +26,8 @@ $ oc login -u daeung
 ..
 
 $ oc delete project cbcd # Test 용 > 프로젝트 다시 생성
-$ oc new-project cbcd --description="cbcd" --display-name="cbcd"
+$ oc new-project cbcd --description="my-prod" --display-name="my-prod"
+$ oc new-project cbcd --description="my-dev" --display-name="my-dev"
 
 $ cat >cloudbeesCD-Config-Generator.sh <<EOF
 #!/bin/bash
@@ -47,19 +48,6 @@ echo -e "Bearer token: \n$TOKEN\n"
 EOF
 
 $ chmod +x cloudbeesCD-Config-Generator.sh
-$ ./cloudbeesCD-Config-Generator.sh cbcd erobot
-serviceaccount/erobot created
-cluster role "edit" added: "system:serviceaccount:cbcd:erobot"
-cluster role "cluster-reader" added: "system:serviceaccount:cbcd:erobot"
-Openshift API Endpoint:
-https://127.0.0.1:8443
-https://test.letsgohomenow.com:8443
-
-Openshift ProjectName : cbcd
-
-Service Account : erobot
-
-Bearer token:
-eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJjYmNkIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImVyb2JvdC10b2tlbi0ydm05ZyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJlcm9ib3QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI0YTI0NTcwNC1mYzdiLTExZWEtODliNi00MjAxMGE4MDAwMDciLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Y2JjZDplcm9ib3QifQ.iC6Jll6JzbMIYoz2vPcrconx3-LOJo-0d80xE85nVUFf8TWVXp8OpMFh3wY1SRS2pWs9XzUFdRjZAwuBMTyV4_i-hZaO6qfZ-nkOcDg9k9gb7XBM4omUhvJPMBjCQSbf8cW6rpRZBHOrGJDfm9_o_VBWfEW0V4JTDMOodziqAuoKAzKQcfnpziKDq6Qp4AHSxx0gdsCW0fRGtRhHZq4pwKAD0k3FL3fZ_Oh5yxQJu4mzAyOuyLQQ5GwBDt0a4nwnjZD4am8Ha-Olo6UFbrkXkDI-p8AriQ9fONpjDOWNHHuOPBuqkga-Sx-dlkHTRxTN7LO7Xx6ArLOn1i0u_UWKDw
-
+$ ./cloudbeesCD-Config-Generator.sh my-prod my-prod-sa 
+$ ./cloudbeesCD-Config-Generator.sh my-dev my-dev-sa 
 ```
