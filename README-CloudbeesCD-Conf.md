@@ -35,6 +35,8 @@ $ cat > cloudbeesCD-Config-Generator.sh << EOF
 
 export projectName=$1
 export serviceAccount=$2
+
+oc delete -n $projectName serviceaccount $serviceAccount
 oc create -n $projectName serviceaccount $serviceAccount
 oc adm policy add-cluster-role-to-user edit system:serviceaccount:$projectName:$serviceAccount
 oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:$projectName:$serviceAccount
