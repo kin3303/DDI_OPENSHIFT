@@ -4,17 +4,46 @@ labels:
   template: cloudbees-cd-pipline
   xpaas: 1.3.2
 metadata:
-  annotations:
-    description: Template for ${APPLICATION_NAME}
   name: ${APPLICATION_NAME}
 objects:
-- apiVersion: apps.openshift.io/v1
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata: 
+	name: ${APPLICATION_NAME} 
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+  labels:
+    app: nodejs-ex
+    name: ${APPLICATION_NAME}
+  spec:
+    output:
+      to:
+        kind: ImageStreamTag
+        name: '${APPLICATION_NAME}:{TAG_NAME}'
+    runPolicy: Serial
+    source:
+      git:
+        ref: dockerPlugin
+        uri: 'https://github.com/kin3303/DDI_OPENSHIFT.git'
+      type: Git
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: 'nodejs:8'
+          namespace: openshift
+      type: Source
+    triggers:
+      - generic:
+          secret: e30cdd272360ccdb
+        type: Generic 
+- apiVersion: v1
   kind: DeploymentConfig
-  metadata:   
+  metadata:
     labels:
       app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}
-    namespace: ${PROJECT_NAME}
+      name: ${APPLICATION_NAME}
   spec:
     replicas: 1
     selector:
@@ -36,7 +65,7 @@ objects:
           deploymentconfig: ${APPLICATION_NAME}
       spec:
         containers:
-          - image: '172.30.1.1:5000/${PROJECT_NAME}/nodejs-image:${TAG_NAME}'
+          - image: '${APPLICATION_NAME}:{TAG_NAME}'
             imagePullPolicy: Always
             name: ${APPLICATION_NAME}
             ports:
@@ -57,21 +86,16 @@ objects:
             - ${APPLICATION_NAME}
           from:
             kind: ImageStreamTag
-            name: '172.30.1.1:5000/my-dev/nodejs-image:${TAG_NAME}'
-            namespace: my-project-dev
+            name: '${APPLICATION_NAME}:${TAG_NAME}' 
         type: ImageChange
-      - type: ConfigChange
 - apiVersion: v1
   kind: Service
   metadata:
-    annotations:
-      description: Service for ${APPLICATION_NAME}
     labels:
       app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}
-    namespace: ${PROJECT_NAME}
+    name: ${APPLICATION_NAME}  
   spec:
-    clusterIP: 172.30.96.213
+    clusterIP: 172.30.172.67
     ports:
       - name: 8080-tcp
         port: 8080
@@ -84,12 +108,9 @@ objects:
 - apiVersion: v1
   kind: Route
   metadata:
-    annotations:
-      description: Route for ${APPLICATION_NAME}
     labels:
-      app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}
-    namespace: ${PROJECT_NAME}
+      app: nodejs-ex
+    name: nodejs-ex
   spec:
     host: ${APPLICATION_NAME}-${PROJECT_NAME}.${HOST_NAME}.xip.io
     port:
@@ -98,12 +119,12 @@ objects:
       kind: Service
       name: ${APPLICATION_NAME}
       weight: 100
-    wildcardPolicy: None
+    wildcardPolicy: None 
 parameters:
 - description: The host name for the application.
   name: HOST_NAME
   required: true
-  value: 35.225.254.224
+  value: 34.69.214.143
 - description: The project name for the application.
   name: PROJECT_NAME
   required: true
@@ -111,7 +132,7 @@ parameters:
 - description: The app name for the application.
   name: APPLICATION_NAME
   required: true
-  value: nodejs-web-demo
+  value: nodejs-demo
 - description: The tag name for the application.
   name: TAG_NAME
   required: true
