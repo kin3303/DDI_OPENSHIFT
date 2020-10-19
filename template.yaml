@@ -20,7 +20,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: '${APPLICATION_NAME}:{TAG_NAME}'
+        name: '${APPLICATION_NAME}:${TAG_NAME}'
     runPolicy: Serial
     source:
       git:
@@ -65,7 +65,7 @@ objects:
           deploymentconfig: ${APPLICATION_NAME}
       spec:
         containers:
-          - image: '${APPLICATION_NAME}:{TAG_NAME}'
+          - image: '${APPLICATION_NAME}:${TAG_NAME}'
             imagePullPolicy: Always
             name: ${APPLICATION_NAME}
             ports:
