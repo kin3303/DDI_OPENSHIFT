@@ -13,8 +13,8 @@ objects:
 - apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
-  labels:
-    app: nodejs-ex
+    labels:
+      app: nodejs-ex
     name: ${APPLICATION_NAME}
   spec:
     output:
@@ -43,7 +43,7 @@ objects:
   metadata:
     labels:
       app: ${APPLICATION_NAME}
-      name: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
   spec:
     replicas: 1
     selector:
