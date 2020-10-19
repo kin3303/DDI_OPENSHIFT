@@ -8,8 +8,8 @@ metadata:
 objects:
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
-  metadata: 
-    name: ${APPLICATION_NAME} 
+  metadata:
+    name: ${APPLICATION_NAME}
 - apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
@@ -37,7 +37,7 @@ objects:
     triggers:
       - generic:
           secret: e30cdd272360ccdb
-        type: Generic 
+        type: Generic
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -86,7 +86,7 @@ objects:
             - ${APPLICATION_NAME}
           from:
             kind: ImageStreamTag
-            name: '${APPLICATION_NAME}:${TAG_NAME}' 
+            name: '${APPLICATION_NAME}:${TAG_NAME}'
         type: ImageChange
 - apiVersion: v1
   kind: Service
@@ -104,13 +104,13 @@ objects:
     selector:
       deploymentconfig: ${APPLICATION_NAME}
     sessionAffinity: None
-    type: ClusterIP 
+    type: ClusterIP
 - apiVersion: v1
   kind: Route
   metadata:
     labels:
-      app: nodejs-ex
-    name: nodejs-ex
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
   spec:
     host: ${APPLICATION_NAME}-${PROJECT_NAME}.${HOST_NAME}.xip.io
     port:
@@ -119,7 +119,7 @@ objects:
       kind: Service
       name: ${APPLICATION_NAME}
       weight: 100
-    wildcardPolicy: None 
+    wildcardPolicy: None
 parameters:
 - description: The host name for the application.
   name: HOST_NAME
