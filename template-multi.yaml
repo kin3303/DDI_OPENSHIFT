@@ -1,0 +1,288 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: cloudbees-cd-pipline
+  xpaas: 1.3.2
+metadata:
+  name: ${APPLICATION_NAME}
+objects:
+
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: ${APPLICATION_NAME}
+  spec:
+    lookupPolicy:
+      local: false
+
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    name: ${APPLICATION_NAME}
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: '${APPLICATION_NAME}:${TAG_NAME}'
+    postCommit:
+      script: npm test
+    resources: {}
+    runPolicy: Serial
+    source:
+      git:
+        uri: 'https://github.com/sclorg/nodejs-ex.git'
+      type: Git
+    strategy:
+      sourceStrategy:
+        env:
+          - name: NPM_MIRROR
+        from:
+          kind: ImageStreamTag
+          name: 'nodejs:8'
+          namespace: openshift
+      type: Source
+    successfulBuildsHistoryLimit: 5
+
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    name: mongodb
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      name: mongodb
+    strategy:
+      activeDeadlineSeconds: 21600
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          name: mongodb
+        name: mongodb
+      spec:
+        containers:
+          - env:
+              - name: MONGODB_USER
+                valueFrom:
+                  secretKeyRef:
+                    key: database-user
+                    name: ${APPLICATION_NAME}
+              - name: MONGODB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: database-password
+                    name: ${APPLICATION_NAME}
+              - name: MONGODB_DATABASE
+                value: sampledb
+              - name: MONGODB_ADMIN_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: database-admin-password
+                    name: ${APPLICATION_NAME}
+            image: >-
+              172.30.1.1:5000/openshift/mongodb@sha256:4ebc0868f577121f0bcaf9c5265a8508d58e407c553099ff8f45b19b07a51a92
+            imagePullPolicy: IfNotPresent
+            livenessProbe:
+              failureThreshold: 3
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              successThreshold: 1
+              tcpSocket:
+                port: 27017
+              timeoutSeconds: 1
+            name: mongodb
+            ports:
+              - containerPort: 27017
+                protocol: TCP
+            readinessProbe:
+              exec:
+                command:
+                  - /bin/sh
+                  - '-i'
+                  - '-c'
+                  - >-
+                    mongo 127.0.0.1:27017/$MONGODB_DATABASE -u $MONGODB_USER -p
+                    $MONGODB_PASSWORD --eval="quit()"
+              failureThreshold: 3
+              initialDelaySeconds: 3
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 1
+            resources:
+              limits:
+                memory: 512Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+              - mountPath: /var/lib/mongodb/data
+                name: mongodb-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+          - name: mongodb-data
+            persistentVolumeClaim:
+              claimName: mongodb
+    test: false
+
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    name: ${APPLICATION_NAME}
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      name: ${APPLICATION_NAME}
+    strategy:
+      activeDeadlineSeconds: 21600
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          name: ${APPLICATION_NAME}
+        name: ${APPLICATION_NAME}
+      spec:
+        containers:
+          - env:
+              - name: DATABASE_SERVICE_NAME
+                value: mongodb
+              - name: MONGODB_USER
+                valueFrom:
+                  secretKeyRef:
+                    key: database-user
+                    name: ${APPLICATION_NAME}
+              - name: MONGODB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: database-password
+                    name: ${APPLICATION_NAME}
+              - name: MONGODB_DATABASE
+                value: sampledb
+              - name: MONGODB_ADMIN_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: database-admin-password
+                    name: ${APPLICATION_NAME}
+            image: '172.30.1.1:5000/${PROJECT_NAME}/${APPLICATION_NAME}:${TAG_NAME}'
+            imagePullPolicy: IfNotPresent
+            livenessProbe:
+              failureThreshold: 3
+              httpGet:
+                path: /
+                port: 8080
+                scheme: HTTP
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 3
+            name: ${APPLICATION_NAME}
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+            readinessProbe:
+              failureThreshold: 3
+              httpGet:
+                path: /
+                port: 8080
+                scheme: HTTP
+              initialDelaySeconds: 3
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 3
+            resources:
+              limits:
+                memory: 512Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: mongodb
+  spec:
+    clusterIP: 172.30.133.31
+    ports:
+      - name: mongodb
+        port: 27017
+        protocol: TCP
+        targetPort: 27017
+    selector:
+      name: mongodb
+    sessionAffinity: None
+    type: ClusterIP
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: ${APPLICATION_NAME}
+  spec:
+    clusterIP: 172.30.178.236
+    ports:
+      - name: web
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+    selector:
+      name: ${APPLICATION_NAME}
+    sessionAffinity: None
+    type: ClusterIP
+
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    name: ${APPLICATION_NAME}
+  spec:
+    host: ${APPLICATION_NAME}-${PROJECT_NAME}.${HOST_NAME}.xip.io
+    to:
+      kind: Service
+      name: ${APPLICATION_NAME}
+      weight: 100
+    wildcardPolicy: None
+
+- apiVersion: v1
+  data:
+    database-admin-password: YUVyS0gwa2ZSSVNiakhDNQ==
+    database-password: R01ENmNveDNvbUZOU2lUMg==
+    database-user: dXNlclBXTg==
+  kind: Secret
+  metadata:
+    name: ${APPLICATION_NAME}
+  type: Opaque
+
+
+parameters:
+- description: The host name for the application.
+  name: HOST_NAME
+  required: true
+  value: 34.69.214.143
+- description: The project name for the application.
+  name: PROJECT_NAME
+  required: true
+  value: my-dev
+- description: The app name for the application.
+  name: APPLICATION_NAME
+  required: true
+  value: nodejs-demo
+- description: The tag name for the application.
+  name: TAG_NAME
+  required: true
+  value: latest
+
