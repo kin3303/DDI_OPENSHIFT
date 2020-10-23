@@ -169,10 +169,6 @@ objects:
       deploymentconfig: ${APPLICATION_NAME}
     sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
-
-
 parameters:
 - description: The project name for the application.
   name: PROJECT_NAME
