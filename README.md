@@ -16,7 +16,7 @@
 ```
 
 
-## Jenkins 설치 (옵션)
+## Jenkins 설치시
 
 ### Step 1. Jenkins 이미지 빌드 및 저장 (필요시만)
 
