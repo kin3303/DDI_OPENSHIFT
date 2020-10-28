@@ -1,4 +1,4 @@
-# TEST 환경 설치
+# Jenkins TEST 환경 docker 설치
 
 - Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
 
