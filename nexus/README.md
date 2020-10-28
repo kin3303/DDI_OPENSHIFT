@@ -1,6 +1,22 @@
 
+## Docker 설치
 
-## Nexus 설치시
+- Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
+
+```console
+  $ sudo su 
+  $ sysctl -w vm.max_map_count=262144
+  $ sysctl -w fs.file-max=65536
+  $ ulimit -n 65536
+  $ ulimit -u 4096
+  $ git clone https://github.com/kin3303/DDI_OPENSHIFT.git
+  $ cd DDI_OPENSHIFT
+  $ git checkout testEnv
+  $ chmod +x install.sh
+  $ ./install.sh
+```
+
+## Nexus 설치
 
 ### Step 1. env 파일 설정
 
@@ -13,7 +29,7 @@
   $ ./start-nexus.sh
 ```
 
-### Step 3. Potainer 설정
+## Portainer 설정
 
 - Portainer 는 5분 내에 admin 계정을 생성해야 사용 가능하다. 
 
