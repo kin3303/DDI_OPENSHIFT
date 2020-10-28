@@ -1,4 +1,4 @@
-# Docker 설치 (필수)
+## Docker 설치 (필수)
 
 - Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
 
@@ -16,9 +16,9 @@
 ```
 
 
-# Jenkins 설치 (옵션)
+## Jenkins 설치 (옵션)
 
-## Jenkins 이미지 빌드 및 저장 (필요시만)
+### Jenkins 이미지 빌드 및 저장 (필요시만)
 
 - Docker on Docker 되도록 Jenkins 이미지 빌드 후 저장
 - 수행후 Docker Compose 파일의 Jenkins 이미지 이름수정 필요
@@ -31,14 +31,14 @@
   $ docker push kin3303/jenkins-docker:latest 
 ```
 
-## Jenkins 설치
+### Jenkins 설치
 
 ```console
   $ chmod +x start-jenkins.sh
   $ ./start-jenkins.sh
 ```
 
-## Potainer 사용
+### Potainer 사용
 
 - Portainer 는 5분 내에 admin 계정을 생성해야 사용 가능하다. 
 
