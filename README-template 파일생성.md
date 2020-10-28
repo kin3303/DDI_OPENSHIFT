@@ -1,17 +1,17 @@
-프로젝트에서 사용중인 리소스 확인 방법
-``` console
-$ oc get -o yaml --export all > project.yaml
+프로젝트 를 template 으로 export 하는 방법
+
+``` console 
+$ oc export all --as-template=nodejsApp.yaml 
+
+
 ```
 
-리소스별 Export 방법
+프로젝트중 필요 Resource 만 template form 으로 export 하는 방법
 ``` console
-$ for object in rolebindings serviceaccounts secrets imagestreamtags cm egressnetworkpolicies rolebindingrestrictions limitranges resourcequotas pvc templates cronjobs statefulsets hpa deployments replicasets poddisruptionbudget endpoints
-do
-  oc get -o yaml --export $object > $object.yaml
-done
+$ oc export bc,is,deployment,route,svc,pvc,limitranges,resourcequotas -l app=nodejs-ex-git --as-template='templateName' >nodejsApp.yaml
 ```
 
-API 리소스 얻는 방법
+Resource 이름 얻는 방법
 
 ``` console
 $  oc api-resources --namespaced=true -o name
