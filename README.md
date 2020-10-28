@@ -50,7 +50,7 @@
 
 ### Step 1. env 파일 설정
 
-- email 과 domain (public ip 를 a record 로 등록한 도메인) 정보를 기입
+- email 과 domain (your-ip-address 를 a record 로 등록한 도메인) 정보를 기입
 
 ###  Step 2. Nexus 설치
 
