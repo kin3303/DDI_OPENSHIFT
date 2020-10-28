@@ -42,7 +42,7 @@ services:
     networks:
       - nexus
     environment:
-      — INSTALL4J_ADD_VM_PARAMS=-Xms4200m -Xmx4200m -XX:MaxDirectMemorySize=4g -Djava.util.prefs.userRoot=/nexus-data/javaprefs
+      - INSTALL4J_ADD_VM_PARAMS="-Xms2g -Xmx2g -XX:MaxDirectMemorySize=3g  -Djava.util.prefs.userRoot=/nexus-data/javaprefs"
     volumes:
       - nexus-volume:/nexus-data
     labels:
