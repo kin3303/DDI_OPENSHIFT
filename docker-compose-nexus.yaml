@@ -1,0 +1,62 @@
+version: '3.3'
+
+services:
+  traefik:
+    image: traefik:v2.2
+    container_name: traefik
+    restart: always
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - nexus
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - letsencrypt-volume:/letsencrypt
+
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  nexus:
+    container_name: nexus
+    image: sonatype/nexus3
+    restart: always
+    networks:
+      - nexus
+    environment:
+      — INSTALL4J_ADD_VM_PARAMS=-Xms4200m -Xmx4200m -XX:MaxDirectMemorySize=4g -Djava.util.prefs.userRoot=/nexus-data/javaprefs
+    volumes:
+      - nexus-volume:/nexus-data
+    labels:
+      - traefik.port=8081
+      - traefik.http.routers.nexus.rule=Host(`${DOMAIN}`)
+      - traefik.enable=true
+      - traefik.http.routers.nexus.entrypoints=websecure
+      - traefik.http.routers.nexus.tls=true
+      - traefik.http.routers.nexus.tls.certresolver=myresolver
+
+volumes:
+  nexus-volume:
+  letsencrypt-volume:
+
+networks:
+  nexus:
+    external: true
