@@ -12,6 +12,7 @@
   $ git clone https://github.com/kin3303/DDI_OPENSHIFT.git
   $ cd DDI_OPENSHIFT
   $ git checkout testEnv
+  $ cd nexus
   $ chmod +x install.sh
   $ ./install.sh
 ```
@@ -26,7 +27,7 @@
 
 ```console
   $ chmod +x start-nexus.sh
-  $ ./start-nexus.sh
+  $ ./start.sh
 ```
 
 ## Portainer 설정
