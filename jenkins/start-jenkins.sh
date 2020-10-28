@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file=${1:-docker-compose-jenkins.yaml} 
+file=${1:-docker-compose.yaml} 
 
 docker-compose -f ${file} up -d
 docker-compose logs -f
