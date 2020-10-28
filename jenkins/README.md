@@ -35,7 +35,7 @@
 ###  Step 2. Jenkins 설치
 
 ```console
-  $ chmod +x start-jenkins.sh
+  $ chmod +x start.sh
   $ ./start.sh
 ```
 
