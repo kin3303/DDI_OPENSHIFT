@@ -1,3 +1,6 @@
+Gitlab 에서 LDAP 을 설정하기 위해 아래와 같이 하면 된다.
+
+```console
 $ vi /etc/gitlab/gitlab.rb
 
 gitlab_rails['ldap_enabled'] = true
@@ -30,7 +33,7 @@ gitlab_rails['ldap_servers'] = {
 
 $ gitlab-ctl reconfigure
 $ gitlab-rake gitlab:ldap:check --trace
-
+```
 
  
 
