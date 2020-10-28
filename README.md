@@ -1,8 +1,6 @@
-# Jenkins TEST 환경 docker 설치
+# Docker 설치 (필수)
 
 - Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
-
-## Step 1. 초기화
 
 ```console
   $ sudo su 
@@ -17,7 +15,10 @@
   $ ./install.sh
 ```
 
-## Step 2. Jenkins 이미지 빌드 및 저장 (Option)
+
+# Jenkins 설치 (옵션)
+
+## Jenkins 이미지 빌드 및 저장 (필요시만)
 
 - Docker on Docker 되도록 Jenkins 이미지 빌드 후 저장
 - 수행후 Docker Compose 파일의 Jenkins 이미지 이름수정 필요
@@ -30,26 +31,17 @@
   $ docker push kin3303/jenkins-docker:latest 
 ```
 
-## Step 3. 테스트 환경 구성
+## Jenkins 설치
 
 ```console
-  $ chmod +x start.sh
-  $ ./start.sh
+  $ chmod +x start-jenkins.sh
+  $ ./start-jenkins.sh
 ```
 
-## Step 4. Potainer 활성화
+## Potainer 사용
 
 - Portainer 는 5분 내에 admin 계정을 생성해야 사용 가능하다. 
 
 ```
   Portainer - http://your-ip-address:9000
-```
-
-## Step 5. 결과 확인
-
-```
-  Portainer - http://your-ip-address:9000
-  Jenkins — http://your-ip-address:8080
-  SonarQube — http://your-ip-address:9000
-  Nexus — http://your-ip-address:8081
 ```
