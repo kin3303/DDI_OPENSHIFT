@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  jenkins:
+    image: kin3303/jenkins-docker:latest 
+    restart: always
+    volumes:
+      - jenkins-volume:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+      - 5000:5000
+      - 50000:50000
+    environment:
+      - TZ=Asia/Seoul
+
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+ 
+volumes:
+  jenkins-volume:
