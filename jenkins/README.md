@@ -11,6 +11,7 @@
   $ git clone https://github.com/kin3303/DDI_OPENSHIFT.git
   $ cd DDI_OPENSHIFT
   $ git checkout testEnv
+  $ cd jenkins
   $ chmod +x install.sh
   $ ./install.sh
 ```
@@ -35,7 +36,7 @@
 
 ```console
   $ chmod +x start-jenkins.sh
-  $ ./start-jenkins.sh
+  $ ./start.sh
 ```
 
 ### Step 3. Potainer 설정
