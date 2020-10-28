@@ -1,8 +1,6 @@
 #!/bin/bash
 
-file=${1:-docker-compose-nexus.yaml} 
-
-docker-compose -f ${file} up -d
+docker-compose -f docker-compose-nexus.yaml up -d
 docker-compose logs -f
 ipAddress="$(dig @resolver1.opendns.com ANY myip.opendns.com +short)"
 
