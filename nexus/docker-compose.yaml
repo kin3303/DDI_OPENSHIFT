@@ -13,9 +13,7 @@ services:
       - ./traefik.yaml:/etc/traefik/traefik.yaml
        
   nexus:
-    container_name: nexus
     image: sonatype/nexus3
-    restart: always
     volumes:
       - nexus-volume:/nexus-data
     labels:
