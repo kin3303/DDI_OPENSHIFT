@@ -32,7 +32,7 @@ services:
       - nexus-volume:/nexus-data
     labels:
       - traefik.port=8081
-      - traefik.http.routers.nexus.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.nexus.rule=Host(`34.123.143.65`)
 
   portainer:
     image: portainer/portainer:latest
