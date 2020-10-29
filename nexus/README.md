@@ -16,7 +16,6 @@
   $ chmod +x install.sh
   $ ./install.sh
   $ docker swarm init
-  $ docker stack rm traefik
 ```
 
 ## Nexus 실행 
