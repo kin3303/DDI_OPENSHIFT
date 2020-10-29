@@ -30,6 +30,7 @@
 ###  Step 2. Nexus 배포
 
 ```console
+  $ docker stack rm traefik
   $ docker stack deploy -c docker-compose.yaml traefik 
 ```
 
