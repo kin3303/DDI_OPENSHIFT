@@ -15,6 +15,7 @@
   $ cd nexus
   $ chmod +x install.sh
   $ ./install.sh
+  $ docker swarm init
 ```
 
 ## Nexus 설치
