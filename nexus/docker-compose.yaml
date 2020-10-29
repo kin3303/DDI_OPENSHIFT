@@ -9,7 +9,6 @@ services:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--api.insecure=true"
     ports:
       - 80:80
       - 443:443
@@ -32,7 +31,6 @@ services:
     labels:
       - traefik.port=8081
       - traefik.http.routers.nexus.rule=Host(`${DOMAIN}`)
-      - traefik.enable=true
 
   portainer:
     image: portainer/portainer:latest
