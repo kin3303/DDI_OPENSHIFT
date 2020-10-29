@@ -16,20 +16,25 @@
   $ chmod +x install.sh
   $ ./install.sh
   $ docker swarm init
+  $ docker stack rm traefik
 ```
 
-## Nexus 설치
+## Nexus 실행 
+ 
+###  Step 1. 설정
 
-### Step 1. env 파일 설정
+1. 도메인 의 A Record 로 테스트할 도메인을 준비한다.
+2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
+3. `docker-compose.yaml` 파일을 열어 `- "traefik.http.routers.nexus.rule=Host(`your_domain_here`)"` 의 도메인을 입력
 
-- email 과 your-ip-address 를 a record 로 등록한 domain 정보를 기입
-
-###  Step 2. Nexus 설치
+###  Step 2. Nexus 배포
 
 ```console
-  $ chmod +x start-nexus.sh
-  $ ./start.sh
+  $ docker stack deploy -c docker-compose.yml traefik 
 ```
+
+배포 후 https://your_domain_here 에 들어가 확인한다.
+
 
 ## Portainer 설정
 
