@@ -2,36 +2,20 @@ version: '3.3'
 
 services:
   traefik:
-    image: traefik:v2.2
+    image: traefik:v2.3
     container_name: traefik
     restart: always
     command:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=true"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
-      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--api.insecure=true"
     ports:
       - 80:80
       - 443:443
+      - 8080:8080
     networks:
       - nexus
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - letsencrypt-volume:/letsencrypt
-
-  portainer:
-    image: portainer/portainer:latest
-    command: -H unix:///var/run/docker.sock
-    ports:
-      - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -49,13 +33,17 @@ services:
       - traefik.port=8081
       - traefik.http.routers.nexus.rule=Host(`${DOMAIN}`)
       - traefik.enable=true
-      - traefik.http.routers.nexus.entrypoints=websecure
-      - traefik.http.routers.nexus.tls=true
-      - traefik.http.routers.nexus.tls.certresolver=myresolver
+
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   nexus-volume:
-  letsencrypt-volume:
 
 networks:
   nexus:
