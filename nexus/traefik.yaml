@@ -34,7 +34,7 @@ entryPoints:
 certificatesResolvers:
   myresolver:
     acme:
-      email: kin3303@gmail.com
+      email: your-email@abc.com
       storage: acme.json
       httpChallenge:
         entryPoint: web
