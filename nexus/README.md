@@ -30,7 +30,7 @@
 ###  Step 2. Nexus 배포
 
 ```console
-  $ docker stack deploy -c docker-compose.yml traefik 
+  $ docker stack deploy -c docker-compose.yaml traefik 
 ```
 
 배포 후 https://your_domain_here 에 들어가 확인한다.
