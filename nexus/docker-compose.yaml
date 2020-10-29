@@ -21,11 +21,16 @@ services:
       - nexus-volume:/nexus-data
     labels:
       - "traefik.enable=true"
+      # Routers
       - "traefik.http.routers.nexus.rule=Host(`your_domain_here`)"
       - "traefik.http.routers.nexus.service=nexus"
-      - "traefik.http.services.nexus.loadbalancer.server.port=8081"
       - "traefik.http.routers.nexus.entrypoints=websecure"
       - "traefik.http.routers.nexus.tls.certresolver=myresolver"
+      - "traefik.http.routers.catapp.middlewares=test-compress"
+      # Services
+      - "traefik.http.services.nexus.loadbalancer.server.port=8081"
+      # Middleware
+       - "traefik.http.middlewares.test-compress.compress=true"    
 
   portainer:
     image: portainer/portainer:latest
