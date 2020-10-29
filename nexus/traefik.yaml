@@ -31,11 +31,19 @@ entryPoints:
 ################################################################
 # Challenge HTTP
 ################################################################
+#certificatesResolvers:
+#  myresolver:
+#    acme:
+#      caserver: https://acme-staging-v02.api.letsencrypt.org/directory
+#      email: your-email@abc.com
+#      storage: acme.json
+#      httpChallenge:
+#        entryPoint: web
 certificatesResolvers:
   myresolver:
     acme:
-      caserver: https://acme-staging-v02.api.letsencrypt.org/directory
-      email: your-email@abc.com
+      email: your_email@example.com  
       storage: acme.json
-      httpChallenge:
-        entryPoint: web
+      tlsChallenge: true
+        # # used during the challenge
+        # entryPoint: web
