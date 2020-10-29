@@ -11,7 +11,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./letsencrypt:/letsencrypt
       - ./traefik.yaml:/etc/traefik/traefik.yaml
-       
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+        
   nexus:
     image: sonatype/nexus3
     volumes:
@@ -19,7 +22,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nexus.rule=Host(`your_domain_here`)"
-      - "traefik.http.routers.nexus.service=catapp"
+      - "traefik.http.routers.nexus.service=nexus"
       - "traefik.http.services.nexus.loadbalancer.server.port=8081"
       - "traefik.http.routers.nexus.entrypoints=websecure"
       - "traefik.http.routers.nexus.tls.certresolver=myresolver"
@@ -31,6 +34,9 @@ services:
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+        
 volumes:
   nexus-volume:
