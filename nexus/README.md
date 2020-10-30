@@ -24,7 +24,7 @@
 
 1. 도메인 의 A Record 로 테스트할 도메인을 준비한다.
 2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
-3. `.env` 파일을 열어 `- "DOMAIN_NAME=사용 가능한 도메인명"` 의 도메인을 입력
+3. `.env` 파일을 열어 `- "DOMAIN_NAME=<DOMAIN>"` 의 <DOMAIN> 을 입력
 
 ###  Step 2. Nexus 배포
 
