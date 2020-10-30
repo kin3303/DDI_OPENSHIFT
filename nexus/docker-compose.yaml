@@ -26,12 +26,12 @@ services:
       - "traefik.http.routers.nexus.rule=Host(`nexus.letsgohomenow.com`)"
       - "traefik.http.routers.nexus.service=nexus"
       - "traefik.http.routers.nexus.entrypoints=websecure"
-      - "traefik.http.routers.nexus.tls.certresolver=nexusresolver" 
+      - "traefik.http.routers.nexus.tls.certresolver=myresolver" 
       # Docker Registry
       - "traefik.http.routers.nexusDocker.rule=Host(`registry.letsgohomenow.com`)"
       - "traefik.http.routers.nexusDocker.service=nexusDocker"
       - "traefik.http.routers.nexusDocker.entrypoints=websecure"
-      - "traefik.http.routers.nexusDocker.tls.certresolver=registryresolver"
+      - "traefik.http.routers.nexusDocker.tls.certresolver=myresolver"
     # Services
       # Nexus
       - "traefik.http.services.nexus.loadbalancer.server.port=8081"
