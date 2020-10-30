@@ -31,7 +31,7 @@ services:
       - "traefik.http.routers.nexusDocker.rule=Host(`registry.letsgohomenow.com`)"
       - "traefik.http.routers.nexusDocker.service=nexusDocker"
       - "traefik.http.routers.nexusDocker.entrypoints=websecure"
-      - "traefik.http.routers.nexusDocker.tls.certresolver=myresolver"
+      - "traefik.http.routers.nexusDocker.tls.certresolver=myresolver2"
     # Services
       # Nexus
       - "traefik.http.services.nexus.loadbalancer.server.port=8081"
