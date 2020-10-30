@@ -22,7 +22,7 @@ services:
     labels:
       - "traefik.enable=true"
     # Routers
-      - "traefik.http.routers.nexus.rule=Host(`your_domain_here`)"
+      - "traefik.http.routers.nexus.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.nexus.service=nexus"
       - "traefik.http.routers.nexus.entrypoints=websecure"
       - "traefik.http.routers.nexus.tls.certresolver=myresolver"
