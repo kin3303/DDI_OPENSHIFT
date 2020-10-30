@@ -34,11 +34,11 @@ entryPoints:
 certificatesResolvers:
   nexusresolver:
     acme:
-      email: your_email@example.com  
+      email: kin3303@gmail.com
       storage: acme.json
       tlsChallenge: true
   registryresolver:
     acme:
-      email: your_email@example.com  
+      email: daeung@plateer.com
       storage: acme.json
       tlsChallenge: true
