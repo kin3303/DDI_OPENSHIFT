@@ -32,7 +32,12 @@ entryPoints:
 # Challenge HTTP
 ################################################################
 certificatesResolvers:
-  myresolver:
+  nexusresolver:
+    acme:
+      email: your_email@example.com  
+      storage: acme.json
+      tlsChallenge: true
+  registryresolver:
     acme:
       email: your_email@example.com  
       storage: acme.json
