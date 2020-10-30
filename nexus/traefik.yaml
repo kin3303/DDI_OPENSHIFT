@@ -32,13 +32,8 @@ entryPoints:
 # Challenge HTTP
 ################################################################
 certificatesResolvers:
-  nexusresolver:
+  myresolver:
     acme:
       email: kin3303@gmail.com
-      storage: acme.json
-      tlsChallenge: true
-  registryresolver:
-    acme:
-      email: daeung@plateer.com
       storage: acme.json
       tlsChallenge: true
