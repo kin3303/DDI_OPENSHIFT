@@ -37,3 +37,8 @@ certificatesResolvers:
       email: kin3303@gmail.com
       storage: acme.json
       tlsChallenge: true
+  myresolver2:
+    acme:
+      email: kin3303@gmail.com
+      storage: acme2.json
+      tlsChallenge: true
