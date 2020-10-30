@@ -14,7 +14,6 @@
   $ git checkout testEnv
   $ cd nexus
   $ chmod +x install.sh && ./install.sh
-  $ chmod +x init.sh && ./init.sh
   $ docker swarm init
 ```
 
@@ -26,7 +25,10 @@
 2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
 3. `.env` 파일을 열어 `- "DOMAIN_NAME=your_domain_here"` 에서 사용 가능항 Domain 을 your_domain_here 에 입력
 4. `.env` 파일을 열어 `- "REGISTRY_DOMAIN_NAME=your_registry_domain_here"` 에서 사용 가능항 Domain 을 your_registry_domain_here 에 입력
-
+5. 아래 명령을 수행
+```console
+  $ chmod +x init.sh && ./init.sh
+```
 
 ###  Step 2. Nexus 배포
 
