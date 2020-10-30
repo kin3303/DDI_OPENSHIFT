@@ -22,21 +22,22 @@ services:
     labels:
       - "traefik.enable=true"
     # Routers
+      # Nexus
       - "traefik.http.routers.nexus.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.nexus.service=nexus"
       - "traefik.http.routers.nexus.entrypoints=websecure"
-      - "traefik.http.routers.nexus.tls.certresolver=myresolver"
-      #- "traefik.http.routers.catapp.middlewares=test-compress"
+      - "traefik.http.routers.nexus.tls.certresolver=myresolver" 
+      # Docker Registry
+      - "traefik.http.routers.nexusDocker.rule=Host(`${REGISTRY_DOMAIN_NAME}`)"
+      - "traefik.http.routers.nexusDocker.service=nexusDocker"
+      - "traefik.http.routers.nexusDocker.entrypoints=websecure"
+      - "traefik.http.routers.nexusDocker.tls.certresolver=myresolver"
     # Services
+      # Nexus
       - "traefik.http.services.nexus.loadbalancer.server.port=8081"
-    # Middleware
-      #- "traefik.http.middlewares.test-compress.compress=true"    
-    ports:
-       # Docker Group Repo
-      - "5000:5000"
-      # Docker Private Repo
-      - "5001:5001"
-      
+      # Docker Registry
+      - "traefik.http.services.nexusDocker.loadbalancer.server.port=5000" 
+
   portainer:
     image: portainer/portainer:latest
     command: -H unix:///var/run/docker.sock
