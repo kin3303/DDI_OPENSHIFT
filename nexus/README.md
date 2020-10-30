@@ -13,8 +13,8 @@
   $ cd DDI_OPENSHIFT
   $ git checkout testEnv
   $ cd nexus
-  $ chmod +x install.sh
-  $ ./install.sh
+  $ chmod +x install.sh && ./install.sh
+  $ chmod +x init.sh && ./init.sh
   $ docker swarm init
 ```
 
