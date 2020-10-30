@@ -23,7 +23,8 @@
 
 1. 도메인 의 A Record 로 테스트할 도메인을 준비한다.
 2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
-3. `docker-compose.yaml` 파일을 열어 `- "Host(`<도메인명>`) 에서 사용 가능항 Domain 을 your_domain_here 에 입력 
+3. `docker-compose.yaml` 파일을 열어 `- nexus.letsgohomenow.com` 을 사용 가능한 도메인 명으로 입력
+4. `docker-compose.yaml` 파일을 열어 `- registry.letsgohomenow.com` 을 사용 가능한 도메인 명으로 입력
 
 ###  Step 2. Nexus 배포
 
