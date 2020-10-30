@@ -18,7 +18,7 @@ services:
   nexus:
     image: sonatype/nexus3
     volumes:
-      - nexus-volume:/nexus-data
+      - ${VOL_BASE_DIR}/nexus:/nexus-data
     labels:
       - "traefik.enable=true"
     # Routers
