@@ -27,6 +27,7 @@
 - Dockierfile 에 추가로 작업이 필요 없는 경우 구어놓은 kin3303/jenkins-docker:latest 사용해도 됨
 
 ```console
+  $ cd ./build
   $ docker login
   $ docker build -t kin3303/jenkins-docker:latest .
   $ docker push kin3303/jenkins-docker:latest 
