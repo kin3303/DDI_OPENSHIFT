@@ -16,7 +16,10 @@ services:
         constraints: [node.role==manager]
 
   jenkins:
-    image: kin3303/jenkins-docker:latest 
+    image: kin3303/jenkins-docker
+    build:
+      context: ./build
+      dockerfile: Dockerfile
     restart: always
     volumes:
       - jenkins-volume:/var/jenkins_home
