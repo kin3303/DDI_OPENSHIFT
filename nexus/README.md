@@ -17,9 +17,9 @@
   $ docker swarm init
 ```
 
-## Nexus 실행 
+## Nexus 설치 
  
-###  Step 1. 설정
+###  Step 1. 도메인, SSL 설정
 
 1. 테스트할 도메인을 두 개 준비( 하나는 nexus 하나는 docker registry )
 2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
@@ -33,9 +33,16 @@
   $ docker stack deploy -c docker-compose.yaml traefik 
 ```
 
-### Step 3. Nexus 에 docker(host) 레포지토리 설정
+### Step 3. Potainer 활성화
 
- 
+- Portainer 는 5분 내에 admin 계정을 생성해야 사용 가능하다. 
+
+```
+  Portainer - http://your-ip-address:9000
+```
+
+### Step 4. Nexus 에 docker(host) 레포지토리 설정
+
 1. Nexus 서버 도메인 (https://nexus.letsgohomenow.com) 로 들어가서 admin 으로 로그인 시도한다.
 2. admin 초기 패스워드는 Portainer(http://hostIPAddress:9000) 에서 Nexus 컨테이너로 bash 로 접속해 얻어내며 admin 패스워드를 바꾼다.
 3. 톱니바퀴 -> Repositories -> Create Repository -> docker(hosted)    
