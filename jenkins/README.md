@@ -1,4 +1,4 @@
-## Docker 설치 (필수)
+## Docker 설치
 
 - Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
 
@@ -12,14 +12,14 @@
   $ cd DDI_OPENSHIFT
   $ git checkout testEnv
   $ cd jenkins
-  $ chmod +x install.sh
-  $ ./install.sh
+  $ chmod +x install.sh && ./install.sh
+  $ docker swarm init
 ```
 
 
-## Jenkins 설치시
+## Jenkins 설치
 
-### Step 1. Jenkins 이미지 빌드 및 저장 (필요시만)
+### Step 1. Jenkins 이미지 빌드 및 저장 (Option)
 
 - Docker on Docker 되도록 Jenkins 이미지 빌드 후 저장
 - 수행후 Docker Compose 파일의 Jenkins 이미지 이름수정 필요
@@ -32,14 +32,21 @@
   $ docker push kin3303/jenkins-docker:latest 
 ```
 
-###  Step 2. Jenkins 설치
+1. 테스트할 도메인을 두 개 준비( 하나는 nexus 하나는 docker registry )
+2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
+3. `docker-compose.yaml` 파일을 열어 `- nexus.letsgohomenow.com` 에 nexus 도메인을 입력
+4. `docker-compose.yaml` 파일을 열어 `- registry.letsgohomenow.com` 에 docker registry 용 도메인을 입력
+
+###  Step 2 도메인, SSL 설정
+
+###  Step 3. Jenkins 배포
 
 ```console
-  $ chmod +x start.sh
-  $ ./start.sh
+  $ docker stack rm traefik
+  $ docker stack deploy -c docker-compose.yaml traefik 
 ```
 
-### Step 3. Potainer 설정
+### Step 4. Potainer 활성화
 
 - Portainer 는 5분 내에 admin 계정을 생성해야 사용 가능하다. 
 
