@@ -8,7 +8,10 @@ rm -rf /tmp/download/docker/dockerd && \
 mv /tmp/download/docker/docker* /usr/local/bin/ && \
 rm -rf /tmp/download
 
+RUN useradd -m -g jenkins jenkins
 RUN groupadd -g 999 docker
-RUN usermod -aG staff,docker jenkins
+RUN usermod -aG docker jenkins
+
+RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER jenkins 
