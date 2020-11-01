@@ -1,6 +1,20 @@
-version: '3'
+version: '3.3'
 
 services:
+  traefik:
+    image: traefik:v2.3
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8090:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+
   jenkins:
     image: kin3303/jenkins-docker:latest 
     restart: always
@@ -13,6 +27,15 @@ services:
       - 50000:50000
     environment:
       - TZ=Asia/Seoul
+    labels:
+      - "traefik.enable=true"
+    # Routers
+      - "traefik.http.routers.nexus.rule=Host(`jenkins.letsgohomenow.com`)"
+      - "traefik.http.routers.nexus.service=nexus"
+      - "traefik.http.routers.nexus.entrypoints=websecure"
+      - "traefik.http.routers.nexus.tls.certresolver=myresolver"
+    # Services
+      - "traefik.http.services.nexus.loadbalancer.server.port=8080"
 
   portainer:
     image: portainer/portainer:latest
