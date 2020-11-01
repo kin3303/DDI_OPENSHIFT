@@ -32,12 +32,11 @@
   $ docker push kin3303/jenkins-docker:latest 
 ```
 
-1. 테스트할 도메인을 두 개 준비( 하나는 nexus 하나는 docker registry )
-2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
-3. `docker-compose.yaml` 파일을 열어 `- nexus.letsgohomenow.com` 에 nexus 도메인을 입력
-4. `docker-compose.yaml` 파일을 열어 `- registry.letsgohomenow.com` 에 docker registry 용 도메인을 입력
-
 ###  Step 2 도메인, SSL 설정
+
+1. 테스트할 도메인을 준비
+2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
+3. `docker-compose.yaml` 파일을 열어 `- jenkins.letsgohomenow.com` 에 jenkins 도메인을 입력 
 
 ###  Step 3. Jenkins 배포
 
