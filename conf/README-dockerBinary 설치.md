@@ -84,3 +84,11 @@ $ systemctl daemon-reload
 $ systemctl enable docker
 $ systemctl start docker
 ```
+
+## Step 5. dcs 설치
+
+```console
+$ curl -sL bit.ly/ralf_dcs -o ./dcs
+$ chmod 755 ./dcs
+$ mv ./dcs /usr/bin/dcs
+```
