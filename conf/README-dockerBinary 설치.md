@@ -1,6 +1,8 @@
 
+## Step 1.  Docker Binary 다운로드 
+
 ```console
-# Docker Binary 다운로드 
+
 $ wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz
 $ tar xvf docker-18.06.3-ce.tgz
 $ chmod +x docker
@@ -10,9 +12,11 @@ $ sudo cp docker/* /usr/bin/
 # Docker 그룹에 현재 User 추가
 $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
+```
 
+## Step 2. Docker 서비스 생성
 
-# 서비스 생성
+```console
 $ cat <<'EOF' >>/lib/systemd/system/docker.service
 [Unit]
 Description=Docker Application Container Engine
@@ -49,8 +53,12 @@ StartLimitInterval=60s
 [Install]
 WantedBy=multi-user.target
 EOF
+```
 
-# 소켓 생성
+
+## Step 3. Docker 소켓 생성
+
+```console
 $ cat <<'EOF' >>/lib/systemd/system/docker.socket
 [Unit]
 Description=Docker Socket for the API
@@ -65,8 +73,12 @@ SocketGroup=docker
 [Install]
 WantedBy=sockets.target
 EOF
+```
 
-# 서비스 시작
+
+## Step 4. Docker 서비스 시작
+
+```console
 $ sudo su
 $ systemctl daemon-reload
 $ systemctl enable docker
