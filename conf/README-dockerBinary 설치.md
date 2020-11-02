@@ -1,15 +1,18 @@
 
 ```console
+# Docker Binary 다운로드 
 $ wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz
 $ tar xvf docker-18.06.3-ce.tgz
 $ chmod +x docker
-$ sudo mv docker /usr/local/bin/docker
-
-$ sudo groupadd docker
-$ sudo usermod -aG docker $USER
 $ sudo chmod +x docker/*
 $ sudo cp docker/* /usr/bin/
 
+# Docker 그룹에 현재 User 추가
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+
+
+# 서비스 생성
 $ cat <<'EOF' >>/lib/systemd/system/docker.service
 [Unit]
 Description=Docker Application Container Engine
@@ -47,7 +50,7 @@ StartLimitInterval=60s
 WantedBy=multi-user.target
 EOF
 
-
+# 소켓 생성
 $ cat <<'EOF' >>/lib/systemd/system/docker.socket
 [Unit]
 Description=Docker Socket for the API
@@ -63,6 +66,7 @@ SocketGroup=docker
 WantedBy=sockets.target
 EOF
 
+# 서비스 시작
 $ sudo su
 $ systemctl daemon-reload
 $ systemctl enable docker
