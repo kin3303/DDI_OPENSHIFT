@@ -6,7 +6,7 @@
 * [Install Jenkins](https://github.com/kin3303/DDI_OPENSHIFT/tree/testEnv/jenkins)
 
 ### Setup Jenkins Docker Plugin
-* [Install Docker Plugin](https://github.com/kin3303/DDI_OPENSHIFT/blob/dockerPlugin/README.md)
+* [Install Docker Plugin](https://github.com/kin3303/DDI_OPENSHIFT/tree/dockerPlugin)
 
 ## 02. NEXUS
 
