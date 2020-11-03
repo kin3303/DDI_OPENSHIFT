@@ -1,7 +1,7 @@
 # Openshift Pipeline 설계 정리 
 
 
-## 02. NEXUS
+## 01. NEXUS
 
 ### Install Nexus 
 * [Install Nexus](https://github.com/kin3303/DDI_OPENSHIFT/tree/testEnv/nexus)
@@ -10,7 +10,7 @@
 * [Nexus Configuration](https://github.com/kin3303/DDI_OPENSHIFT/blob/testEnv/conf/README-Openshift%20%EC%99%B8%EB%B6%80%20Registry%20(Nexus)%20%EC%97%B0%EA%B2%B0.md)
 
 
-## 01. JENKINS
+## 02. JENKINS
 
 ### Install Jenkins
 * [Install Jenkins](https://github.com/kin3303/DDI_OPENSHIFT/tree/testEnv/jenkins)
