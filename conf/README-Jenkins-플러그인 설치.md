@@ -16,7 +16,6 @@
 
 # Jenkins 환경구성 - Jenkins 와 Openshift Cluster 연결 방법
 
-
 ## Step 1 : Jenkins 에 Openshift Client Plugin 설치
  
 - Manage Jenkins => Manage Plugins => Available Tab => Filter 로 "Openshift" 입력후 아래 설정을 진행
