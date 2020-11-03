@@ -7,7 +7,7 @@ https://docs.openshift.com/container-platform/4.1/openshift_images/managing_imag
 
 $ oc login https://web.letsgohomenow.com:8443 --token=WsOQcb8_aOnFO8UJjpb5KNMJtI3YF5TU2qXscxbtKlM
 $ oc project <projectname>
-$ oc create secret docker-registry nexus\
+$ oc create secret docker-registry nexus \
   --docker-server=https://registry.letsgohomenow.com/ \
   --docker-username=docker \
   --docker-password=docker123\
