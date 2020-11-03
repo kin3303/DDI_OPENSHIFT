@@ -1,10 +1,5 @@
 
-# Cloudbees CD 에서  Openshift Configuration 생성 방법 
-
-EC-Openshift 는 각 프로젝트 별로 SA 계정에 권한을 부여하고 그 토큰을 Secret 으로 관리하고 있다.
-따라서 SA 계정을 생성하여 프로젝트에 액세스 할 수 있는 권한을 부여하고 SA 계정의 Secret 을 얻어 Access Token 을 얻어내야 한다. 
-관련하여 admin 권한을 가진 계정으로 먼저 로그인하고 사용할 프로젝트는 만들어 놓는다.
-
+## Step 1. SA 계정의 Secret 을 얻어 Endpoint, Access Token 얻어내기
 
 ```console
 
@@ -54,3 +49,30 @@ $ chmod +x cloudbeesCD-Config-Generator.sh
 $ ./cloudbeesCD-Config-Generator.sh my-prod my-prod-sa 
 $ ./cloudbeesCD-Config-Generator.sh my-dev my-dev-sa 
 ```
+
+## Step 2 : Cloudbees CD 설정
+
+1. Cloudbees CD 에 두 개의 Configuration 을 생성
+   - Configuration 파일에 정리된 명령을 실행
+   - Plugins -> EC-Openshift -> Configure
+       - Openshift API Endpoint : https://test.letsgohomenow.com:8443
+       - Service Account
+           - Name : my-dev-sa
+           - Bearer token : 토큰값 입력
+   - Plugins -> EC-Openshift -> Configure
+       - Openshift API Endpoint : https://test.letsgohomenow.com:8443
+       - Service Account
+           - Name : my-prod-sa
+           - Bearer token : 토큰값 입력
+2. Cloudbees CD 에 두 개의 Env 을 생성
+   - New Environment
+       - Name : my-dev
+       - Cluster Type : Openshift
+       - Cluster Name : my-dev
+       - Configuration : my-dev-sa
+       - Openshift Project : my-dev
+   - New Environment
+       - Name : my-prod
+       - Cluster Type : Openshift
+       - Configuration : my-prod-sa
+       - Openshift Project : my-prod 
