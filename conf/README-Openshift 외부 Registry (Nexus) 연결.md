@@ -10,7 +10,7 @@ $ oc project <projectname>
 $ oc create secret docker-registry nexus \
   --docker-server=https://registry.letsgohomenow.com/ \
   --docker-username=docker \
-  --docker-password=docker123\
+  --docker-password=docker123 \
   --docker-email=kin3303@gmail.com
 ```
 
