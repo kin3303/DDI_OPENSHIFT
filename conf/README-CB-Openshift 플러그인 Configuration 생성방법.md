@@ -5,25 +5,8 @@
 
 
 # 로그인
-$ oc login ..
-...
-
-$ oc get users
-NAME        UID                                    FULL NAME   IDENTITIES
-admin       307ba95f-cfc8-11ea-9bee-42010a800006               anypassword:admin
-daeung      418125c6-cfc8-11ea-9bee-42010a800006               anypassword:daeung
-developer   1070d1ca-cfbc-11ea-9bee-42010a800006               anypassword:developer
-
-$ oc adm policy add-cluster-role-to-user cluster-admin daeung
-cluster role "cluster-admin" added: "daeung"
-
-$ oc login -u daeung
+$ oc login -u ..
 ..
-
-# oc delete project my-prod  
-# oc delete project my-dev
-$ oc new-project my-prod --description="my-prod" --display-name="my-prod"
-$ oc new-project my-dev --description="my-dev" --display-name="my-dev"
 
 $ cat <<'EOF' >>cloudbeesCD-Config-Generator.sh
 #!/bin/bash
