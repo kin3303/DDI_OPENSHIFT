@@ -1,1 +1,1 @@
-# Openshift 와 Cloudbees CD 를 연동하기 위한 프로젝트
+# Openshift Pipeline 설계 정리 
