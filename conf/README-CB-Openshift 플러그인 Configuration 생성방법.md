@@ -5,7 +5,7 @@
 
 
 # 로그인
-$ oc login -u system:admin
+$ oc login ..
 ...
 
 $ oc get users
