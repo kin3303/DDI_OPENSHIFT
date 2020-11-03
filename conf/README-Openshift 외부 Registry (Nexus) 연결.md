@@ -24,19 +24,7 @@ $ oc create secret docker-registry nexus\
 ```console
 $ oc secrets link default nexus --for=pull
 $ oc secrets link builder nexus
-$ oc describe sa builder
-Name:                builder
-Namespace:           my-dev
-Labels:              <none>
-Annotations:         <none>
-Image pull secrets:  builder-dockercfg-k4bhw
-Mountable secrets:   builder-token-s2hzz
-                     builder-dockercfg-k4bhw
-                     nexus
-Tokens:              builder-token-8wvs7
-                     builder-token-s2hzz
-Events:              <none>
-[daeung616@instance-1 ~]$ oc describe sa default
+$ oc describe sa default
 Name:                default
 Namespace:           my-dev
 Labels:              <none>
