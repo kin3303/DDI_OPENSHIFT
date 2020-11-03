@@ -6,9 +6,7 @@ https://docs.openshift.com/container-platform/4.1/openshift_images/managing_imag
 ```console
 
 $ oc login https://web.letsgohomenow.com:8443 --token=WsOQcb8_aOnFO8UJjpb5KNMJtI3YF5TU2qXscxbtKlM
-
 $ oc project <projectname>
-
 $ oc create secret docker-registry nexus\
   --docker-server=https://registry.letsgohomenow.com/ \
   --docker-username=docker \
@@ -26,7 +24,6 @@ $ oc create secret docker-registry nexus\
 ```console
 $ oc secrets link default nexus --for=pull
 $ oc secrets link builder nexus
-
 $ oc describe sa builder
 Name:                builder
 Namespace:           my-dev
@@ -51,8 +48,6 @@ Mountable secrets:   default-token-jgcq5
 Tokens:              default-token-jgcq5
                      default-token-mxfg2
 Events:              <none>
-
-
 $ oc describe sa builder
 Name:                builder
 Namespace:           my-dev
