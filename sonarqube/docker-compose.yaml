@@ -42,7 +42,7 @@ services:
       - "traefik.http.routers.sonarqube.entrypoints=websecure"
       - "traefik.http.routers.sonarqube.tls.certresolver=myresolver"
     # Services
-      - "traefik.http.services.sonarqube.loadbalancer.server.port=8080"
+      - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
 
   portainer:
     image: portainer/portainer:latest
