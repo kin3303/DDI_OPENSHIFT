@@ -31,7 +31,7 @@ services:
       - "traefik.http.routers.nexus.tls.certresolver=myresolver" 
       # Docker Registry
       #- "traefik.http.routers.nexusDocker.rule=Host(`registry.letsgohomenow.com`)"
-      - "traefik.http.routers.nexusDocker.rule=Host(`nexus.letsgohomenow.com`) && (PathPrefix(`/registry`)
+      - "traefik.http.routers.nexusDocker.rule=Host(`nexus.letsgohomenow.com`) && PathPrefix(`/registry`)
       - "traefik.http.routers.nexusDocker.service=nexusDocker"
       - "traefik.http.routers.nexusDocker.entrypoints=websecure"
       #- "traefik.http.routers.nexusDocker.tls.certresolver=myresolver2"
