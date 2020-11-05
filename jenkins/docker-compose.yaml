@@ -33,6 +33,24 @@ services:
     # Services
       - "traefik.http.services.jenkins.loadbalancer.server.port=8080"
 
+  certdumper:
+    image: alpine:latest
+    depends_on:
+      - traefik
+    volumes:
+      - ssl-volume:/traefik
+    command: >
+      ash -c " \
+        apk --no-cache add inotify-tools jq openssl util-linux bash && \
+        wget https://raw.githubusercontent.com/containous/traefik/master/contrib/scripts/dumpcerts.sh -O dumpcerts.sh && \
+        mkdir -p /traefik/ssl/ && \
+        while true; do \
+          inotifywait -e modify /traefik/acme.json && \
+            bash dumpcerts.sh /traefik/acme.json /traefik/ssl/ && \
+            ln -f /traefik/ssl/certs/* /traefik/ssl/ && \
+            ln -f /traefik/ssl/private/* /traefik/ssl/; \
+        done"
+        
   portainer:
     image: portainer/portainer:latest
     command: -H unix:///var/run/docker.sock
@@ -43,3 +61,4 @@ services:
  
 volumes:
   jenkins-volume:
+  ssl-volume:
