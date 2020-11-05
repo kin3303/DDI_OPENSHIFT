@@ -35,5 +35,5 @@ certificatesResolvers:
   myresolver:
     acme:
       email: kin3303@gmail.com
-      storage: acme.json
+      storage: ./letsencrypt/acme.json
       tlsChallenge: true
