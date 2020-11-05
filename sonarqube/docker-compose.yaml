@@ -1,0 +1,60 @@
+version: '3.3'
+
+services:
+  traefik:
+    image: traefik:v2.3
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+  db:
+    image: postgres:12.1
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=mypass
+      - POSTGRES_DB=sonarqube
+    volumes:
+      - sonarqube_db:/var/lib/postgresql/data
+
+  sonarqube:
+    image: sonarqube:7.7-community
+    environment:
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=mypass
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonarqube
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_data:/opt/sonarqube/data
+    labels:
+      - "traefik.enable=true"
+    # Routers
+      - "traefik.http.routers.sonarqube.rule=Host(`sonar.letsgohomenow.com`)"
+      - "traefik.http.routers.sonarqube.service=sonarqube"
+      - "traefik.http.routers.sonarqube.entrypoints=websecure"
+      - "traefik.http.routers.sonarqube.tls.certresolver=myresolver"
+    # Services
+      - "traefik.http.services.sonarqube.loadbalancer.server.port=8080"
+
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+ 
+volumes:
+  sonarqube_conf:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_data:
+  sonarqube_db:
