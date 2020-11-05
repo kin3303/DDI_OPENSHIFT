@@ -11,7 +11,7 @@
   $ git clone https://github.com/kin3303/DDI_OPENSHIFT.git
   $ cd DDI_OPENSHIFT
   $ git checkout testEnv
-  $ cd jenkins
+  $ cd sonarqube
   $ chmod +x install.sh && ./install.sh
   $ docker swarm init
 ```
