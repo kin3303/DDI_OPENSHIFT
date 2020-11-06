@@ -80,6 +80,7 @@ EOF
 
 ```console
 $ sudo su
+$ chmod 777 /var/run/docker.sock
 $ systemctl daemon-reload
 $ systemctl enable docker
 $ systemctl start docker
