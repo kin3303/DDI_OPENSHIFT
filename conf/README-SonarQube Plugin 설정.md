@@ -9,5 +9,5 @@
   6. TestConnection : Yes
   
 ## Step 2. SonarQube 서버 SonarQube Project 생성 
-  프로젝트 명 : ddi-toolchain-test
-  프로젝트 키 : ddi-toolchain-test
+  1. 프로젝트 명 : ddi-toolchain-test
+  2. 프로젝트 키 : ddi-toolchain-test
