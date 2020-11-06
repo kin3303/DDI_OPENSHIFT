@@ -25,6 +25,8 @@ services:
 
   sonarqube:
     image: sonarqube:7.7-community
+    ports:
+      - 9000:9000
     environment:
       - sonar.jdbc.username=sonar
       - sonar.jdbc.password=mypass
@@ -44,13 +46,13 @@ services:
     # Services
       - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
 
-  portainer:
-    image: portainer/portainer:latest
-    command: -H unix:///var/run/docker.sock
-    ports:
-      - 9000:9000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  #portainer:
+  #  image: portainer/portainer:latest
+  #  command: -H unix:///var/run/docker.sock
+  #  ports:
+  #    - 9000:9000
+  #  volumes:
+  #    - /var/run/docker.sock:/var/run/docker.sock
  
 volumes:
   sonarqube_conf:
