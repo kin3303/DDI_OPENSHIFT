@@ -25,3 +25,6 @@
 
 ### Setup Openshift Configuration
 * [Openshift Configuration](https://github.com/kin3303/DDI_OPENSHIFT/blob/testEnv/conf/README-CB-Openshift%20%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%20Configuration%20%EC%83%9D%EC%84%B1%EB%B0%A9%EB%B2%95.md)
+
+### Setup Sonarqube Configuration
+* [Sonarqube Configuration](https://github.com/kin3303/DDI_OPENSHIFT/blob/testEnv/conf/README-SonarQube%20Plugin%20%EC%84%A4%EC%A0%95.md)
