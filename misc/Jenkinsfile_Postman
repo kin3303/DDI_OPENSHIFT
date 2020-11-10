@@ -1,7 +1,7 @@
 node { 
-	//stage('preparation') {
-	//	checkout scm
-	//}
+	stage('preparation') {
+		checkout scm
+	}
 	stage('postman test') { 
 	   
 		//def newmanContainer = docker.image('postman/newman')
