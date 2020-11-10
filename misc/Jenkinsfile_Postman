@@ -3,11 +3,16 @@ node {
 		checkout scm
 	}
 	stage('postman test') { 
-		//https://github.com/DannyDainton/newman-reporter-htmlextra
+	   
+		//def newmanContainer = docker.image('postman/newman')
 		def newmanContainer = docker.image('dannydainton/htmlextra')
 		newmanContainer.pull()
 		newmanContainer.inside("""--entrypoint=''""") {
-			 sh 'newman run "https://www.postman.com/collections/8a0c9bc08f062d12dcda" --reporters="htmlextra" --reporter-htmlextra-export="/var/jenkins_home/workspace/newman/newman-report.html" '
+			sh 'newman run "https://www.postman.com/collections/8a0c9bc08f062d12dcda" --reporters="htmlextra" --reporter-htmlextra-export="/var/jenkins_home/workspace/newman/newman-report.html" '
+			if(summary.run.failures.length !== 0){
+				process.exit(-1);
+			}
+
 		}
 	} 
 }
