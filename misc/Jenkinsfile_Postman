@@ -3,8 +3,7 @@ node {
 		checkout scm
 	}
 	stage('postman test') { 
-	   
-		//def newmanContainer = docker.image('postman/newman')
+		//https://github.com/DannyDainton/newman-reporter-htmlextra
 		def newmanContainer = docker.image('dannydainton/htmlextra')
 		newmanContainer.pull()
 		newmanContainer.inside("""--entrypoint=''""") {
