@@ -24,11 +24,7 @@
 1. 테스트할 도메인을 두 개 준비( 하나는 nexus 하나는 docker registry )
 2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
 3. `docker-compose.yaml` 파일을 열어 `- nexus.letsgohomenow.com` 에 nexus 도메인을 입력
-4. `docker-compose.yaml` 파일을 열어 `- registry.letsgohomenow.com` 에 docker registry 용 도메인을 입력
-
-### (Option) 도메인 인증이 안될 경우
-
-1. docker-compose-non-ssl.yaml 파일을 docker-compose.yaml 로 변경 후 Step 1 의 절차를 수행
+4. `docker-compose.yaml` 파일을 열어 `- registry.letsgohomenow.com` 에 docker registry 용 도메인을 입력 
 
 ###  Step 2. Nexus 배포
 
@@ -52,16 +48,20 @@
 3. 톱니바퀴 -> Repositories -> Create Repository -> docker(hosted)    
      - Name : docker-registry
      - HTTP : 체크, 5000 입력
-     - Insecure 설정인 경우 아래 설정도 포함필요. 
+     - Insecure registry 을 사용하고자 하는 경우
         - Enable Docker V1 API 체크
         - Allow anonymous docker pull 체크
         - 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
         - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가
         ```console
+        $ vi /etc/docker/daemon.json
         {
           "insecure-registries" : ["registry.letsgohomenow.com"]
         }
+        $ service docker restart
         ```
+        - docker service 
+     - Insecure registry 을 사용하고자 하는 모든 docker client 에도 daemon.json 수정 및 docker 재시작 필요
 4. Roles->Create role->Nexus role
      - Role ID: docker-role
      - Role Name: docker-role
