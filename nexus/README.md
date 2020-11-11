@@ -56,10 +56,10 @@
         - Enable Docker V1 API 체크
         - Allow anonymous docker pull 체크
         - 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
-        - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가 
+        - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가
         ```console
         {
-          "insecure-registries" : ["your-domain:5000"]
+          "insecure-registries" : ["registry.letsgohomenow.com"]
         }
         ```
 4. Roles->Create role->Nexus role
