@@ -26,6 +26,10 @@
 3. `docker-compose.yaml` 파일을 열어 `- nexus.letsgohomenow.com` 에 nexus 도메인을 입력
 4. `docker-compose.yaml` 파일을 열어 `- registry.letsgohomenow.com` 에 docker registry 용 도메인을 입력
 
+### (Option) 도메인 인증이 안될 경우
+
+1. docker-compose-non-ssl.yaml 파일을 docker-compose.yaml 로 변경 후 Step 1 의 절차를 수행
+
 ###  Step 2. Nexus 배포
 
 ```console
@@ -48,6 +52,7 @@
 3. 톱니바퀴 -> Repositories -> Create Repository -> docker(hosted)    
      - Name : docker-registry
      - HTTP : 체크, 5000 입력
+     - Insecure 설정인 경우 : Enable Docker V1 API, Allow anonymous docker pull 체크, 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
 4. Roles->Create role->Nexus role
      - Role ID: docker-role
      - Role Name: docker-role
