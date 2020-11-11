@@ -59,7 +59,7 @@
         - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가 
         ```console
         {
-          "insecure-registries" : ["artifact.devops.doosan.com:5000"]
+          "insecure-registries" : ["your-domain:5000"]
         }
         ```
 4. Roles->Create role->Nexus role
