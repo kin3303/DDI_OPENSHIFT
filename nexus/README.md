@@ -48,7 +48,7 @@
 3. 톱니바퀴 -> Repositories -> Create Repository -> docker(hosted)    
      - Name : docker-registry
      - HTTP : 체크, 5000 입력
-     - Insecure registry 을 사용하고자 하는 경우
+     - 내부망에 의해 SSL 인증이 되지 않아 Insecure registry 로 사용해야 되는 경우 아래 설정 
         - Enable Docker V1 API 체크
         - Allow anonymous docker pull 체크
         - 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
