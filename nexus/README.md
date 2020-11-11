@@ -52,7 +52,10 @@
 3. 톱니바퀴 -> Repositories -> Create Repository -> docker(hosted)    
      - Name : docker-registry
      - HTTP : 체크, 5000 입력
-     - Insecure 설정인 경우 : Enable Docker V1 API, Allow anonymous docker pull 체크, 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
+     - Insecure 설정인 경우 아래 설정도 포함필요. 
+        - Enable Docker V1 API 체크
+        - Allow anonymous docker pull 체크
+        - 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
 4. Roles->Create role->Nexus role
      - Role ID: docker-role
      - Role Name: docker-role
