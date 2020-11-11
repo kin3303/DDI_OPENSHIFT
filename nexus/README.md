@@ -52,15 +52,14 @@
         - Enable Docker V1 API 체크
         - Allow anonymous docker pull 체크
         - 톱니바퀴 > Realms > Docker Bearer Token Realm Active로 이동 > Save
-        - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가
+        - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가 및 도커 재시작
         ```console
         $ vi /etc/docker/daemon.json
         {
           "insecure-registries" : ["registry.letsgohomenow.com"]
         }
         $ service docker restart
-        ```
-        - docker service 
+        ``` 
      - Insecure registry 을 사용하고자 하는 모든 docker client 에도 daemon.json 수정 및 docker 재시작 필요
 4. Roles->Create role->Nexus role
      - Role ID: docker-role
