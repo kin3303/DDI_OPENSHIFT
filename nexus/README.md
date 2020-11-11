@@ -59,8 +59,6 @@
         - /etc/docker/daemon.json 파일을 열어 아래 속성을 추가 
         ```console
         {
-          "graph": "/mnt/docker-data",
-          "storage-driver": "overlay",
           "insecure-registries" : ["artifact.devops.doosan.com:5000"]
         }
         ```
