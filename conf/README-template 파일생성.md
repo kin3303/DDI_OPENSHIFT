@@ -9,9 +9,9 @@ $ oc export all --as-template=nodejsApp.yaml
 ``` console
 $ for object in deploymentconfigs imagestreams serviceaccounts secrets imagestreamtags cm limitranges resourcequotas pvc templates cronjobs statefulsets hpa deployments replicasets poddisruptionbudget endpoints
 do
-  oc get -o yaml --export $object > $object.yaml
+  oc get -o yaml --export $object  --as-template > $object.yaml
 done
-```
+``` 
 
 Resource 이름 얻는 방법
 
