@@ -60,7 +60,7 @@
         }
         $ service docker restart
         ``` 
-     - Insecure registry 을 사용하고자 하는 모든 docker client 에도 daemon.json 수정 및 docker 재시작 필요
+       - Insecure registry 을 사용하고자 하는 모든 docker client 에도 daemon.json 수정 및 docker 재시작 필요
 4. Roles->Create role->Nexus role
      - Role ID: docker-role
      - Role Name: docker-role
