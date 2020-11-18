@@ -30,7 +30,7 @@ Namespace:           my-dev
 Labels:              <none>
 Annotations:         <none>
 Image pull secrets:  default-dockercfg-s26q7
-                     ][nexus]]
+                     nexus
 Mountable secrets:   default-token-jgcq5
                      default-dockercfg-s26q7
 Tokens:              default-token-jgcq5
