@@ -7,7 +7,7 @@ $ oc export all --as-template=TemplateName > template.yaml
 프로젝트중 필요 Resource export 하는 방법
 
 ``` console
-$ for object in deploymentconfigs imagestreams serviceaccounts secrets imagestreamtags cm limitranges resourcequotas pvc templates cronjobs statefulsets hpa deployments replicasets poddisruptionbudget endpoints
+$ for object in deploymentconfigs deployments buildconfigs secrets limitranges resourcequotas pvc
 do
   oc get -o yaml --export $object > $object.yaml
 done
