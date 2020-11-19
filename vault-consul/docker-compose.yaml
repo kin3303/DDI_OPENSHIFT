@@ -36,6 +36,8 @@ services:
       - IPC_LOCK
     depends_on:
       - consul
+    links:
+      - "consul:consul"
     labels:
       - "traefik.enable=true"
     # Routers
