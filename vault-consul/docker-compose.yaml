@@ -19,21 +19,14 @@ services:
       - vault
 
   vault:
-    image: kin3303/vault:latest
-    build:
-      context: ./vault
-      dockerfile: Dockerfile
+    image: vault
     volumes:
-      - ./vault/config:/vault/config
-      - ./vault/policies:/vault/policies
-      - ./vault/data:/vault/data
-      - ./vault/logs:/vault/logs
+      - ./tools/wait-for-it.sh:/wait-for-it.sh:z
+      - ./config/vault:/config:z
+      - ./config/vault/policies:/policies:z
     environment:
       - VAULT_ADDR=http://127.0.0.1:8200
-      - VAULT_API_ADDR=http://127.0.0.1:8200
-    command: server -config=/vault/config/vault-config.json
-    cap_add:
-      - IPC_LOCK
+    entrypoint: /wait-for-it.sh -t 20 -h consul -p 8500 -s -- vault server -config=/config/with-consul.hcl
     depends_on:
       - consul
     links:
