@@ -14,6 +14,9 @@ services:
     deploy:
       placement:
         constraints: [node.role==manager]
+    depends_on:
+      - consul
+      - vault
 
   vault:
     image: kin3303/vault:latest
@@ -44,14 +47,12 @@ services:
       - "traefik.http.services.nexus.loadbalancer.server.port=8200"
 
   consul:
-    image: kin3303/consul:latest
-    build:
-      context: ./consul
-      dockerfile: Dockerfile
-    command: agent -server -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect 1 -config-file=/consul/config/config.json
+    image: consul
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
     volumes:
-      - ./consul/config/consul-config.json:/consul/config/config.json
-      - ./consul/data:/consul/data
+      - ./consul/config/server_config.json:/consul/config/server_config.json
+      - consul-server-data:/consul/data:rw
     labels:
       - "traefik.enable=true"
     # Routers
@@ -83,3 +84,7 @@ services:
     deploy:
       placement:
         constraints: [node.role==manager]
+
+volumes:
+  consul-server-data:
+    driver: local
