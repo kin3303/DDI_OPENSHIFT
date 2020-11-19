@@ -21,7 +21,7 @@ services:
   vault:
     image: vault
     volumes:
-      - ./vault/wait-for-it.sh:/wait-for-it.sh:z
+      - ./vault/tools/wait-for-it.sh:/wait-for-it.sh:z
       - ./vault/config:/config:z
       - ./vault/policies:/policies:z 
     environment:
