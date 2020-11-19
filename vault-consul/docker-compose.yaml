@@ -62,16 +62,16 @@ services:
     # Services
       - "traefik.http.services.nexusDocker.loadbalancer.server.port=8500"
 
-  consul-worker:
-    image: kin3303/consul:latest
-    build:
-      context: ./consul
-      dockerfile: Dockerfile
-    command: agent -server -join consul -config-file=/consul/config/config.json
-    volumes:
-      - ./consul/config/consul-config.json:/consul/config/config.json
-    depends_on:
-      - consul
+ # consul-worker:
+ #   image: kin3303/consul:latest
+ #   build:
+ #     context: ./consul
+ #     dockerfile: Dockerfile
+ #   command: agent -server -join consul -config-file=/consul/config/config.json
+ #   volumes:
+ #     - ./consul/config/consul-config.json:/consul/config/config.json
+ #   depends_on:
+ #     - consul
 
   portainer:
     image: portainer/portainer:latest
