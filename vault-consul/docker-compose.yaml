@@ -16,6 +16,7 @@ services:
         constraints: [node.role==manager]
 
   vault:
+    image: kin3303/vault:latest
     build:
       context: ./vault
       dockerfile: Dockerfile
@@ -43,6 +44,7 @@ services:
       - "traefik.http.services.nexus.loadbalancer.server.port=8200"
 
   consul:
+    image: kin3303/consul:latest
     build:
       context: ./consul
       dockerfile: Dockerfile
@@ -61,6 +63,7 @@ services:
       - "traefik.http.services.nexusDocker.loadbalancer.server.port=8500"
 
   consul-worker:
+    image: kin3303/consul:latest
     build:
       context: ./consul
       dockerfile: Dockerfile
