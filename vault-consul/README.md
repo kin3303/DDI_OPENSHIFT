@@ -13,7 +13,7 @@
   $ git clone https://github.com/kin3303/DDI_OPENSHIFT.git
   $ cd DDI_OPENSHIFT
   $ git checkout testEnv
-  $ cd nexus
+  $ cd vault-consul
   $ chmod +x install.sh && ./install.sh
   $ docker swarm init
 ```
