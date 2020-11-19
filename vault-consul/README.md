@@ -1,7 +1,5 @@
 ## Docker 설치
-
 - Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
-
 ```console
   $ sudo su 
   $ sysctl -w vm.max_map_count=262144
@@ -16,16 +14,13 @@
 ```
 
 ## Vault, Consul 설치
-
 ```console
   $ docker-compose up -d --build
 ```
 
 ## Vault, Consul 접근
-
 - Vault : http://<HOSTNAME>:8200/ui
 - Consul : http://<HOSTNAME>:8500/ui
   
 ## Reference
-
 - https://testdriven.io/managing-secrets-with-vault-and-consul
