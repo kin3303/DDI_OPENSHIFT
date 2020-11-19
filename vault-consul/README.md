@@ -28,11 +28,19 @@
 3. `docker-compose.yaml` 파일을 열어 `- valut.letsgohomenow.com` 에 vault 도메인을 입력
 4. `docker-compose.yaml` 파일을 열어 `- consul.letsgohomenow.com` 에 consul 용 도메인을 입력 
 
-###  Step 2. Nexus 배포
+
+###  Step 2. Build Image (Option
 
 ```console
-  $ docker stack rm traefik
-  $ docker stack deploy -c docker-compose.yaml traefik 
+  $ docker login
+  $ docker-compose build
+  $ docker-compose push
+```
+###  Step 2. Vault 배포
+
+```console
+  $ docker stack rm vault
+  $ docker stack deploy -c docker-compose.yaml vault 
 ```
 
 ### Step 3. Potainer 활성화
