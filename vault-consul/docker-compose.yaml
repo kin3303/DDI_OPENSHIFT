@@ -26,11 +26,9 @@ services:
       - ./vault/policies:/policies:z 
     environment:
       - VAULT_ADDR=http://127.0.0.1:8200
-    entrypoint: /wait-for-it.sh -t 20 -h consul -p 8500 -s -- vault server -config=/config/with-consul.hcl
+    entrypoint: /wait-for-it.sh -t 10 -h consul -p 8500 -s -- vault server -config=/config/with-consul.hcl
     depends_on:
       - consul
-    links:
-      - "consul:consul"
     labels:
       - "traefik.enable=true"
     # Routers
@@ -48,6 +46,9 @@ services:
     volumes:
       - ./consul/config/server_config.json:/consul/config/server_config.json
       - ./consul/data:/consul/data:rw
+    ports:
+      - 8400:8400
+      - 8600:53/udp
     labels:
       - "traefik.enable=true"
     # Routers
