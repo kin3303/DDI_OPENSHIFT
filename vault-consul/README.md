@@ -19,8 +19,8 @@
 ```
 
 ### Vault, Consul 접근
-- Vault : http://<HOSTNAME>:8200/ui
-- Consul : http://<HOSTNAME>:8500/ui
+- Vault : http://YOUR_HOST:8200/ui
+- Consul : http://YOUR_HOST:8500/ui
   
 ### Reference
 - https://testdriven.io/managing-secrets-with-vault-and-consul
