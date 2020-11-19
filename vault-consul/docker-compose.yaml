@@ -52,7 +52,7 @@ services:
       CONSUL_BIND_INTERFACE: eth0
     volumes:
       - ./consul/config/server_config.json:/consul/config/server_config.json
-      - consul-server-data:/consul/data:rw
+      - ./consul/data:/consul/data:rw
     labels:
       - "traefik.enable=true"
     # Routers
@@ -73,7 +73,3 @@ services:
     deploy:
       placement:
         constraints: [node.role==manager]
-
-volumes:
-  consul-server-data:
-    driver: local
