@@ -29,13 +29,6 @@
 4. `docker-compose.yaml` 파일을 열어 `- consul.letsgohomenow.com` 에 consul 용 도메인을 입력 
 
 
-###  Step 2. Build Image (Option
-
-```console
-  $ docker login
-  $ docker-compose build
-  $ docker-compose push
-```
 ###  Step 2. Vault 배포
 
 ```console
