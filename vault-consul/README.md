@@ -1,4 +1,4 @@
-## Docker 설치
+### Docker 설치
 - Tested with 24GB memory, 8 cores,  Ubuntu 16.04 LTS  
 ```console
   $ sudo su 
@@ -13,14 +13,14 @@
   $ chmod +x install.sh && ./install.sh
 ```
 
-## Vault, Consul 설치
+### Vault, Consul 설치
 ```console
   $ docker-compose up -d --build
 ```
 
-## Vault, Consul 접근
+### Vault, Consul 접근
 - Vault : http://<HOSTNAME>:8200/ui
 - Consul : http://<HOSTNAME>:8500/ui
   
-## Reference
+### Reference
 - https://testdriven.io/managing-secrets-with-vault-and-consul
