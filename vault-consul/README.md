@@ -54,6 +54,7 @@ file/    file    n/a
 
 새로고침 간격은 있지만 명시적으로 취소되지 않는 한 만료되지 않는다.
 키/값 으로 미리 정의한 다음 공유한다.
+CLI, HTTP, Backend 를 통해서 설정할 수 있다.
 
 1. Secret 활성화
 
@@ -68,6 +69,17 @@ file/    file    n/a
 Success! Data written to: kv/foo
 ```
 
+``` console
+$ export VAULT_TOKEN=your_token_goes_here
+$ curl \
+    -H "X-Vault-Token: $VAULT_TOKEN" \
+    -H "Content-Type: application/json" \
+    -X POST \
+    -d '{ "data": { "foo": "world" } }' \
+    http://127.0.0.1:8200/v1/kv/data/hello
+```
+
+
 3. Secret 읽기
 
 ``` console
@@ -76,6 +88,14 @@ Success! Data written to: kv/foo
 Key    Value
 ---    -----
 bar    precious
+```
+
+``` console
+$ export VAULT_TOKEN=your_token_goes_here
+$ curl \
+    -H "X-Vault-Token: $VAULT_TOKEN" \
+    -X GET \
+    http://127.0.0.1:8200/v1/kv/data/hello
 ```
 
 4. Secret 버전관리
