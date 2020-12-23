@@ -78,7 +78,7 @@ Key    Value
 bar    precious
 ```
 
-3. Secret 버전관리
+4. Secret 버전관리
 
 ``` console
 //Version Enable
@@ -98,6 +98,20 @@ version          2
 # vault kv get -version=1 kv/foo
 # vault kv get -version=2 kv/foo
 ```
+
+1. Secret Delete/Undelete/Destroy
+
+``` console
+# vault kv delete -versions=1 kv/foo
+Success! Data deleted (if it existed) at: kv/foo
+
+# vault kv undelete -versions=1 kv/foo
+Success! Data written to: kv/undelete/foo
+
+# vault kv destroy -versions=1 kv/foo
+Success! Data written to: kv/destroy/foo
+```
+
 
 #### 동적
 
