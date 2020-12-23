@@ -47,5 +47,24 @@ Path     Type    Description
 file/    file    n/a
 ```
 
+
+### Secrets
+
+#### 정적
+
+새로고침 간격은 있지만 명시적으로 취소되지 않는 한 만료되지 않는다.
+키/값 으로 미리 정으한 다음 공유한다.
+
+1. Secret 활성화
+
+``` console
+bash-5.0# vault secrets enable kv
+```
+
+#### 동적
+
+필요에 따라 생성되고 짧은 기간 후에 만료된다.
+접근하기 전까지는 존재하지 않기 때문에 노출이 적다. 
+
 ### Reference
 - https://testdriven.io/managing-secrets-with-vault-and-consul
