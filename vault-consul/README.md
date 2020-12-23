@@ -53,12 +53,50 @@ file/    file    n/a
 #### 정적
 
 새로고침 간격은 있지만 명시적으로 취소되지 않는 한 만료되지 않는다.
-키/값 으로 미리 정으한 다음 공유한다.
+키/값 으로 미리 정의한 다음 공유한다.
 
 1. Secret 활성화
 
 ``` console
-bash-5.0# vault secrets enable kv
+# vault secrets enable kv
+```
+
+2. Secret 쓰기
+
+``` console
+# vault kv put kv/foo bar=precious
+Success! Data written to: kv/foo
+```
+
+3. Secret 읽기
+
+``` console
+# vault kv get kv/foo
+=== Data ===
+Key    Value
+---    -----
+bar    precious
+```
+
+3. Secret 버전관리
+
+``` console
+//Version Enable
+# vault kv enable-versioning kv/
+Success! Tuned the secrets engine at: kv/
+
+//두번째 값 삽입
+# vault kv put kv/foo bar=copper
+Key              Value
+---              -----
+created_time     2020-04-23T13:59:41.4928751Z
+deletion_time    n/a
+destroyed        false
+version          2
+
+// 버전 확인
+# vault kv get -version=1 kv/foo
+# vault kv get -version=2 kv/foo
 ```
 
 #### 동적
