@@ -26,11 +26,12 @@
 
 ``` console
 $ docker-compose exec vault bash
-bash-5.0# vault operator init
-bash-5.0# vault operator unseal <UnsealKey1>
-bash-5.0# vault operator unseal <UnsealKey2>
-bash-5.0# vault operator unseal <UnsealKey3>
-bash-5.0# vault login <TOKEN>
+
+# vault operator init
+# vault operator unseal <UnsealKey1>
+# vault operator unseal <UnsealKey2>
+# vault operator unseal <UnsealKey3>
+# vault login <TOKEN>
 ```
   
 ### Auditing
@@ -40,7 +41,7 @@ $ docker-compose exec vault bash
 bash-5.0# vault audit enable file file_path=/vault/logs/audit.log
 Success! Enabled the file audit device at: file/
 
-bash-5.0# vault audit list
+# vault audit list
 Path     Type    Description
 ----     ----    -----------
 file/    file    n/a
