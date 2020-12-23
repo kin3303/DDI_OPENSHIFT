@@ -21,6 +21,30 @@
 ### Vault, Consul 접근
 - Vault : http://YOUR_HOST:8200/ui
 - Consul : http://YOUR_HOST:8500/ui
+
+### Unseal & Authenticate
+
+``` console
+$ docker-compose exec vault bash
+bash-5.0# vault operator init
+bash-5.0# vault operator unseal <UnsealKey1>
+bash-5.0# vault operator unseal <UnsealKey2>
+bash-5.0# vault operator unseal <UnsealKey3>
+bash-5.0# vault login <TOKEN>
+```
   
+### Auditing
+
+``` console
+$ docker-compose exec vault bash
+bash-5.0# vault audit enable file file_path=/vault/logs/audit.log
+Success! Enabled the file audit device at: file/
+
+bash-5.0# vault audit list
+Path     Type    Description
+----     ----    -----------
+file/    file    n/a
+```
+
 ### Reference
 - https://testdriven.io/managing-secrets-with-vault-and-consul
