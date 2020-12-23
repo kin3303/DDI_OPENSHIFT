@@ -99,7 +99,7 @@ version          2
 # vault kv get -version=2 kv/foo
 ```
 
-1. Secret Delete/Undelete/Destroy
+5. Secret Delete/Undelete/Destroy
 
 ``` console
 # vault kv delete -versions=1 kv/foo
