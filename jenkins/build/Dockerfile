@@ -11,6 +11,9 @@ rm -rf /tmp/download
 RUN groupadd -g 999 docker
 RUN usermod -aG docker jenkins
 
+# sudo user 로 jenkins user 
+RUN usermod -aG sudo jenkins
+
 RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER jenkins 
