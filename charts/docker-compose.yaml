@@ -1,0 +1,59 @@
+version: '3.3'
+
+services:
+#####################################################################################################
+## Traefik
+#####################################################################################################
+  traefik:
+    image: traefik:v2.3
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+
+#####################################################################################################
+## Chart Museum
+#####################################################################################################
+  chart-museum:
+    restart: always
+    image: chartmuseum/chartmuseum:latest
+    container_name: chart-museum
+    volumes:
+    - chart-volume:/data/charts
+    environment:
+    - STORAGE=local
+    - STORAGE_LOCAL_ROOTDIR=/data/charts
+    - PORT=8080
+   labels:
+      - "traefik.enable=true"
+    # Routers
+      - "traefik.http.routers.charts.rule=Host(`chart.letsgohomenow.com`)"
+      - "traefik.http.routers.charts.service=jenkins"
+      - "traefik.http.routers.charts.entrypoints=websecure"
+      - "traefik.http.routers.charts.tls.certresolver=myresolver_chart"
+    # Services
+      - "traefik.http.services.charts.loadbalancer.server.port=8080"
+
+#####################################################################################################
+## Portainer
+#####################################################################################################
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+        
+volumes:
+  chart-volume:
