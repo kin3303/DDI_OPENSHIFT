@@ -37,7 +37,7 @@ services:
       - "traefik.http.routers.charts.rule=Host(`chart.letsgohomenow.com`)"
       - "traefik.http.routers.charts.service=jenkins"
       - "traefik.http.routers.charts.entrypoints=websecure"
-      - "traefik.http.routers.charts.tls.certresolver=myresolver_chart"
+      - "traefik.http.routers.charts.tls.certresolver=myresolver"
     # Services
       - "traefik.http.services.charts.loadbalancer.server.port=8080"
 
