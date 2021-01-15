@@ -87,3 +87,10 @@
   $ helm search repo myrepo
 ```
 
+## CloudBees CD 와 통신 설정
+```console
+  $ cat /root/.kube
+  ...
+  $ cp -r /root/.kube /home/ubuntu/
+```
+
