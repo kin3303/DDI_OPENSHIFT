@@ -20,7 +20,6 @@
 ## Cloudbees CD Agent 설치
 
 ```
-# 클러스터에 Cloudbees CD Agent 설치
 $ sudo su
 $ groupadd ubuntu
 $ useradd -m -g ubuntu ubuntu
