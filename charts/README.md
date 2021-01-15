@@ -20,12 +20,12 @@
 ## Cloudbees CD Agent 설치
 
 ```console
-$ sudo su
-$ groupadd ubuntu
-$ useradd -m -g ubuntu ubuntu
-$ echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-$ chmod 777 <Cloudbees-CD-Installfile>
-$ ./<Cloudbees-CD-Installfile> --mode silent --installAgent --unixAgentUser ubuntu --unixAgentGroup ubuntu  --remoteServer 182.162.101.234
+  $ sudo su
+  $ groupadd ubuntu
+  $ useradd -m -g ubuntu ubuntu
+  $ echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+  $ chmod 777 <Cloudbees-CD-Installfile>
+  $ ./<Cloudbees-CD-Installfile> --mode silent --installAgent --unixAgentUser ubuntu --unixAgentGroup ubuntu  --remoteServer 182.162.101.234
 ```
 
 ## Chart Museum 설치
@@ -62,26 +62,26 @@ $ ./<Cloudbees-CD-Installfile> --mode silent --installAgent --unixAgentUser ubun
 배포가 필요한 위치에 Helm 을 설치하자.
 
 ```console
-$ su ubuntu
-$ wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
-$ tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
-$ mv linux-amd64/helm /usr/bin/helm
-$ helm
+  $ su ubuntu
+  $ wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
+  $ tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
+  $ mv linux-amd64/helm /usr/bin/helm
+  $ helm
 ```
 
 ## Helm Museum 레포지토리 추가
 
 ```console
-$ helm repo add stable https://charts.helm.sh/stable
-$ helm repo add stable https://<YourDomain>
-$ helm repo update
+  $ helm repo add stable https://charts.helm.sh/stable
+  $ helm repo add stable https://<YourDomain>
+  $ helm repo update
 ```
 
 ## Helm Museum 레포지토리 에 Chart 저장
 
 ```console
-$ helm create repotest
-$ helm package repotest/
-$ curl --data-binary "@repotest-0.1.0.tgz" https://<YourDomain>/api/charts
+  $ helm create repotest
+  $ helm package repotest/
+  $ curl --data-binary "@repotest-0.1.0.tgz" https://<YourDomain>/api/charts
 ```
 
