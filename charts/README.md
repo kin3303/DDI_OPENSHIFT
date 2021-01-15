@@ -24,7 +24,8 @@ $ sudo su
 $ groupadd ubuntu
 $ useradd -m -g ubuntu ubuntu
 $ echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-$ ./CD인스톨파일 --mode silent --installAgent --unixAgentUser ubuntu --unixAgentGroup ubuntu  --remoteServer 182.162.101.234
+$ chmod 777 <Cloudbees-CD-Installfile>
+$ ./<Cloudbees-CD-Installfile> --mode silent --installAgent --unixAgentUser ubuntu --unixAgentGroup ubuntu  --remoteServer 182.162.101.234
 ```
 
 ## Chart Museum 설치
