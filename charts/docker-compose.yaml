@@ -26,7 +26,7 @@ services:
     image: chartmuseum/chartmuseum:latest
     container_name: chart-museum
     volumes:
-    - chart-volume:/data/charts
+    - ~/.helm/repository/local:/data/charts
     environment:
     - STORAGE=local
     - STORAGE_LOCAL_ROOTDIR=/data/charts
@@ -53,7 +53,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
       placement:
-        constraints: [node.role==manager]
-        
-volumes:
-  chart-volume:
+        constraints: [node.role==manager] 
