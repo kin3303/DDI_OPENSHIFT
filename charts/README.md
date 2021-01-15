@@ -101,5 +101,5 @@
 
 그리고 아래와 같이 configuration 을 만들자.
 
-<img src="../img/cbcdConfig.png" alt="CBCD" height="350"> 
+<img src="../img/cbcdConfig.png" alt="CBCD" height="700"> 
 
