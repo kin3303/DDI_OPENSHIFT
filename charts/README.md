@@ -73,7 +73,7 @@
 
 ```console
   $ helm repo add stable https://charts.helm.sh/stable
-  $ helm repo add stable https://<YourDomain>
+  $ helm repo add myrepo https://<YourDomain>
   $ helm repo update
 ```
 
@@ -83,5 +83,7 @@
   $ helm create repotest
   $ helm package repotest/
   $ curl --data-binary "@repotest-0.1.0.tgz" https://<YourDomain>/api/charts
+  $ helm repo update
+  $ helm search repo myrepo
 ```
 
