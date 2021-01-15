@@ -90,6 +90,7 @@
 ## CloudBees CD 와 통신 설정
 
 플러그인에서 복사 기능을 제공하지만 실제로 동작하지 않는다.
+
 따라서 아래와 같이 수동으로 ./kube/config 파일을 복사하자.
 
 ```console
@@ -97,4 +98,8 @@
   ...
   $ cp -r /root/.kube /home/ubuntu/
 ```
+
+그리고 아래와 같이 configuration 을 만들자.
+
+<img src="../img/cbcdConfig.png" alt="CBCD" height="350"> 
 
