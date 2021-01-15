@@ -61,17 +61,29 @@ $ ./CD인스톨파일 --mode silent --installAgent --unixAgentUser ubuntu --unix
 
 배포가 필요한 위치에 Helm 을 설치하자.
 
-```
+```console
 # Helm 설치
 $ su ubuntu
 $ wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
 $ tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
 $ mv linux-amd64/helm /usr/bin/helm
 $ helm
+```
 
+## Helm Museum 레포지토리 추가
+
+```console
 # Helm Repository 추가
 $ helm repo add stable https://charts.helm.sh/stable
-$ helm repo add stable https://<Chart도메인명>
+$ helm repo add stable https://<YourDomain>
 $ helm repo update
+```
+
+## Helm Museum 레포지토리 에 Chart 저장
+
+```console
+$ helm create repotest
+$ helm package repotest/
+$ curl --data-binary "@repotest-0.1.0.tgz" https://<YourDomain>/api/charts
 ```
 
