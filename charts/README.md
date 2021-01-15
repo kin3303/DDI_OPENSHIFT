@@ -87,3 +87,8 @@
   $ helm search repo myrepo
 ```
 
+## Helm Museum 레포지토리 에 Chart 삭제
+
+```console
+   $ curl -X DELETE https://<YourDomain>/api/charts/repotest/0.1.0
+```
