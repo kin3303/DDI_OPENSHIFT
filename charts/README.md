@@ -19,7 +19,7 @@
 
 ## Cloudbees CD Agent 설치
 
-```
+```console
 $ sudo su
 $ groupadd ubuntu
 $ useradd -m -g ubuntu ubuntu
