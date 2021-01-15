@@ -15,8 +15,17 @@
   $ cd jenkins
   $ chmod +x install.sh && ./install.sh
   $ docker swarm init
-  
-  
+```
+
+## Cloudbees CD Agent 설치
+
+```
+# 클러스터에 Cloudbees CD Agent 설치
+$ sudo su
+$ groupadd ubuntu
+$ useradd -m -g ubuntu ubuntu
+$ echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+$ ./CD인스톨파일 --mode silent --installAgent --unixAgentUser ubuntu --unixAgentGroup ubuntu  --remoteServer 182.162.101.234
 ```
 
 ## Chart Museum 설치
@@ -27,16 +36,13 @@
 2. `traefik.yaml` 을 열어 `Challenge HTTP` 섹션의  `email:`  을 수정 
 3. `docker-compose.yaml` 파일을 열어 `- chart.letsgohomenow.com` 에 Chart Museum 도메인을 입력 
 
+
 ###  Step 3. Chart Museum 배포
 
 ~/.helm/repository/local 위치에 Chart 저장소 볼륨이 연결된다.
  따라서 적절한 사용자로 변경후 컨테이너를 배포해야 한다.
  
 ```console
-  $ sudo su
-  $ groupadd ubuntu
-  $ useradd -m -g ubuntu ubuntu
-  $ echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
   $ su ubuntu
   $ docker stack rm chart
   $ docker stack deploy -c docker-compose.yaml chart 
@@ -49,3 +55,23 @@
 ```
   Portainer - http://your-ip-address:9000
 ```
+
+
+## Helm Museum 설치
+
+배포가 필요한 위치에 Helm 을 설치하자.
+
+```
+# Helm 설치
+$ su ubuntu
+$ wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
+$ tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
+$ mv linux-amd64/helm /usr/bin/helm
+$ helm
+
+# Helm Repository 추가
+$ helm repo add stable https://charts.helm.sh/stable
+$ helm repo add stable http://182.162.101.235:9500
+$ helm repo update
+```
+
