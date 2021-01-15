@@ -15,6 +15,8 @@
   $ cd jenkins
   $ chmod +x install.sh && ./install.sh
   $ docker swarm init
+  
+  
 ```
 
 ## Chart Museum 설치
@@ -28,6 +30,11 @@
 ###  Step 3. Chart Museum 배포
 
 ```console
+  $ sudo su
+  $ groupadd ubuntu
+  $ useradd -m -g ubuntu ubuntu
+  $ echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+  $ su ubuntu
   $ docker stack rm chart
   $ docker stack deploy -c docker-compose.yaml chart 
 ```
