@@ -29,6 +29,10 @@
 
 ###  Step 3. Chart Museum 배포
 
+ docker-compose.yaml 의 구성에서 알 수 있듯이 ~/.helm/repository/local 위치에 Chart 저장소 볼륨이 연결된다.
+ 
+ 따라서 적절한 사용자로 변경후 컨테이너를 배포해야 한다.
+ 
 ```console
   $ sudo su
   $ groupadd ubuntu
