@@ -71,7 +71,7 @@ $ helm
 
 # Helm Repository 추가
 $ helm repo add stable https://charts.helm.sh/stable
-$ helm repo add stable http://182.162.101.235:9500
+$ helm repo add stable https://<Chart도메인명>
 $ helm repo update
 ```
 
